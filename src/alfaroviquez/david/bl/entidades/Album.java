@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Album {
     private String nombre;
-    private Artista artista;
+    private ArrayList<Artista> artistas;
     private String fechalanzamiento;
     private String imagen;
     private ArrayList<Cancion> canciones;
@@ -25,12 +25,12 @@ public class Album {
         this.nombre = nombre;
     }
 
-    public Artista getArtista() {
-        return artista;
+    public ArrayList<Artista> getArtistas() {
+        return artistas;
     }
 
-    public void setArtista(Artista artista) {
-        this.artista = artista;
+    public void setArtistas(ArrayList<Artista> artistas) {
+        this.artistas = artistas;
     }
 
     public String getFechalanzamiento() {
@@ -50,9 +50,9 @@ public class Album {
     }
     public Album(){}
 
-    public Album(String nombre, Artista artista, String fechalanzamiento, String imagen, ArrayList<Cancion> canciones) {
+    public Album(String nombre, ArrayList<Artista> artistas, String fechalanzamiento, String imagen, ArrayList<Cancion> canciones) {
         this.nombre = nombre;
-        this.artista = artista;
+        this.artistas = artistas;
         this.fechalanzamiento = fechalanzamiento;
         this.imagen = imagen;
         this.canciones = canciones;
@@ -62,7 +62,7 @@ public class Album {
     public String toString() {
         return "Album{" +
                 "nombre='" + nombre + '\'' +
-                ", artista=" + artista +
+                ", artistas=" + artistas +
                 ", fechalanzamiento='" + fechalanzamiento + '\'' +
                 ", imagen='" + imagen + '\'' +
                 ", canciones=" + canciones +

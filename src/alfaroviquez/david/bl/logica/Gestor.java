@@ -13,6 +13,7 @@ public class Gestor {
     private ArrayList<Compositor> compositores;
     private ArrayList<Cancion> canciones;
     private ArrayList<ListaReproduccion> listasDeReproduccion;
+    private ArrayList<Album> albums;
 
     public Gestor() {
 
@@ -22,6 +23,7 @@ public class Gestor {
         this.compositores = new ArrayList<>();
         this.canciones = new ArrayList<>();
         this.listasDeReproduccion = new ArrayList<>();
+        this.albums = new ArrayList<>();
     }
 
 
@@ -110,4 +112,40 @@ public class Gestor {
         }
         return null;
      }
+
+     public void guardarAlbum(Album album){
+        albums.add(album);
+     }
+
+     public ArrayList<Album> listarAlbums(){
+        return this.albums;
+     }
+
+     public void agregarCancionaAlbum(String nombreAlbum, Cancion cancion){
+        for(int i=0;i<albums.size();i++){
+            Album albumActual = albums.get(i);
+            if(albumActual.getNombre().toLowerCase().equals(nombreAlbum.toLowerCase())){
+                albumActual.getCanciones().add(cancion);
+            }
+        }
+     }
+     public void agregarArtista(String nombre, Artista artista){
+        for(int i=0;i<albums.size();i++){
+            Album albumActual = albums.get(i);
+            if(albumActual.getNombre().toLowerCase().equals(nombre.toLowerCase())){
+                albumActual.getArtistas().add(artista);
+            }
+        }
+     }
+    public float puntajeLista(ListaReproduccion lista){
+        float prom = 0;
+        for(int i=0; i<lista.getCanciones().size();i++){
+            Cancion cancion = lista.getCanciones().get(i);
+            int calificacion = cancion.getCalificacion();
+            int sumaCal = 0;
+            sumaCal = calificacion+sumaCal;
+            prom = sumaCal/lista.getCanciones().size();
+        }
+        return prom;
+    }
 }

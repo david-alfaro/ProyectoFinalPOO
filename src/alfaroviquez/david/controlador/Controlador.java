@@ -4,7 +4,7 @@ import alfaroviquez.david.bl.entidades.*;
 import alfaroviquez.david.bl.logica.Gestor;
 import alfaroviquez.david.iu.IU;
 
-import java.util.ArrayList;
+
 
 public class Controlador {
     private IU interfaz = new IU();
@@ -16,7 +16,7 @@ public class Controlador {
             interfaz.menu();
             opcion = interfaz.leerOpcion();
             procesarOpcion(opcion);
-        } while (opcion != 14);
+        } while (opcion != 16);
     }
 
     private void procesarOpcion(int opcion) {
@@ -61,10 +61,15 @@ public class Controlador {
                 listarListaReproduccion();
                 break;
             case 14:
+                crearAlbum();
                 break;
-
+            case 15:
+                listarAlbums();
+                break;
+            case 16:
+                break;
             default:
-                interfaz.imprimirMensaje("Opcion invalida");
+                interfaz.imprimirMensaje("Opción inválida");
         }
     }
 
@@ -80,15 +85,15 @@ public class Controlador {
         String nombreUsuario = interfaz.leerTexto();
         interfaz.imprimirMensaje("Correo: ");
         String correo = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Contrasena: ");
+        interfaz.imprimirMensaje("Contraseña: ");
         String contrasenna = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Imagen de perfil o avatar: ");
+        interfaz.imprimirMensaje("Imagen de perfil o ávatar: ");
         String imagen = interfaz.leerTexto();
         interfaz.imprimirMensaje("Edad: ");
         int edad = interfaz.leerNumeros();
         interfaz.imprimirMensaje("Pais de origen: ");
         String pais = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Identificacion: ");
+        interfaz.imprimirMensaje("Identificación: ");
         String identificacion = interfaz.leerTexto();
         if (edad >= 18) {
             UsuarioFinal nuevoUsuario = new UsuarioFinal(nombre, apellido1, apellido2, nombreUsuario, correo, contrasenna, imagen, edad, pais, identificacion);
@@ -109,9 +114,9 @@ public class Controlador {
         String nombreUsuario = interfaz.leerTexto();
         interfaz.imprimirMensaje("Correo: ");
         String correo = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Contrasena: ");
+        interfaz.imprimirMensaje("Contraseña: ");
         String contrasenna = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Imagen de perfil o avatar: ");
+        interfaz.imprimirMensaje("Imagen de perfil o ávatar: ");
         String imagen = interfaz.leerTexto();
         Administrador admin = new Administrador(nombre, apellido1, apellido2, nombreUsuario, correo, contrasenna, imagen);
         gestor.guardarUsuario(admin);
@@ -132,7 +137,7 @@ public class Controlador {
         String apellido1 = interfaz.leerTexto();
         interfaz.imprimirMensaje("Segundo apellido: ");
         String apellido2 = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Nombre artistico: ");
+        interfaz.imprimirMensaje("Nombre artístico: ");
         String nombreArtistico = interfaz.leerTexto();
         interfaz.imprimirMensaje("Pais de origen: ");
         String pais = interfaz.leerTexto();
@@ -140,11 +145,11 @@ public class Controlador {
         String genero = interfaz.leerTexto();
         interfaz.imprimirMensaje("Edad: ");
         int edad = interfaz.leerNumeros();
-        interfaz.imprimirMensaje("Descripcion: ");
+        interfaz.imprimirMensaje("Descripción: ");
         String descripcion = interfaz.leerTexto();
         interfaz.imprimirMensaje("Fecha de nacimiento: ");
         String fechaNacimiento = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Fecha de defuncion: ");
+        interfaz.imprimirMensaje("Fecha de defunción: ");
         String fechaDefuncion = interfaz.leerTexto();
         Artista nuevoArtista = new Artista(nombre, apellido1, apellido2, nombreArtistico, pais, genero, edad, descripcion, fechaNacimiento, fechaDefuncion);
         gestor.guardarArtista(nuevoArtista);
@@ -160,7 +165,7 @@ public class Controlador {
     private void registrarGenero() {
         interfaz.imprimirMensaje("Nombre: ");
         String nombre = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Descripcion: ");
+        interfaz.imprimirMensaje("Descripción: ");
         String descripcion = interfaz.leerTexto();
         Genero nuevoGenero = new Genero(nombre, descripcion);
         gestor.guardarGenero(nuevoGenero);
@@ -197,9 +202,9 @@ public class Controlador {
     }
 
     private void registrarCancion() {
-        interfaz.imprimirMensaje("Nombre de la cancion: ");
+        interfaz.imprimirMensaje("Nombre de la canción: ");
         String nombreCancion = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Nombre del genero: ");
+        interfaz.imprimirMensaje("Nombre del género: ");
         String nombreGenero = interfaz.leerTexto();
         Genero unGenero = gestor.encontrarGenero(nombreGenero);
         interfaz.imprimirMensaje("Nombre del artista: ");
@@ -212,7 +217,7 @@ public class Controlador {
         String nombreAlbum = interfaz.leerTexto();
         interfaz.imprimirMensaje("Fecha lanzamiento: ");
         String fecha = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Calificacion: ");
+        interfaz.imprimirMensaje("Calificación: ");
         int calificacion = interfaz.leerNumeros();
         Cancion nuevaCancion = new Cancion(nombreCancion, unGenero, unArtista, unCompositor, nombreAlbum, fecha, calificacion);
         gestor.guardarCancion(nuevaCancion);
@@ -232,15 +237,27 @@ public class Controlador {
     public void crearListaReproduccion() {
         interfaz.imprimirMensaje("Nombre: ");
         String nombreLista = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Fecha de creacion: ");
+        interfaz.imprimirMensaje("Fecha de creación: ");
         String fecha = interfaz.leerTexto();
         ListaReproduccion nuevaLista = new ListaReproduccion();
         nuevaLista.setNombre(nombreLista);
         nuevaLista.setFechaCreacion(fecha);
-        interfaz.imprimirMensaje("Nombre de cancion: ");
-        String nombreCancion = interfaz.leerTexto();
-        Cancion unaCancion = gestor.encontrarCancion(nombreCancion);
-        gestor.agregarCancion(nombreLista, unaCancion);
+        boolean agregarcancion = true;
+        do{
+            interfaz.imprimirMensaje("Nombre de canción: ");
+            String nombreCancion = interfaz.leerTexto();
+            Cancion unaCancion = gestor.encontrarCancion(nombreCancion);
+            gestor.agregarCancion(nombreLista, unaCancion);
+            interfaz.imprimirMensaje("Desea agregar una nueva canción (s/n): ");
+            String opcion = interfaz.leerTexto();
+            if (opcion.toLowerCase().equals("n")){
+                agregarcancion=false;
+            }
+        }while (agregarcancion);
+
+        gestor.guardarLista(nuevaLista);
+        //interfaz.imprimirMensaje("El promedio de calificacion de esta lista es: ");
+        //gestor.puntajeLista(nuevaLista);
 
 
     }
@@ -249,6 +266,56 @@ public class Controlador {
         for (ListaReproduccion repro : gestor.listarListasReproduccion()
         ) {
             interfaz.imprimirMensaje(repro.toString());
+        }
+    }
+
+    public void crearAlbum() {
+        interfaz.imprimirMensaje("Nombre del album: ");
+        String nombreAlbum = interfaz.leerTexto();
+
+        boolean agregarArtista = true;
+        do {
+            interfaz.imprimirMensaje("Nombre del artista: ");
+            String nombreArtista = interfaz.leerTexto();
+            Artista artista = gestor.encontrarArtista(nombreArtista);
+            interfaz.imprimirMensaje("Desea agregar otro artista (s/n");
+            String opcion = interfaz.leerTexto();
+            if (opcion.toLowerCase().equals("n")) {
+                agregarArtista = false;
+            }
+            gestor.agregarArtista(nombreAlbum, artista);
+        } while (agregarArtista);
+        interfaz.imprimirMensaje("Fecha de lanzamiento: ");
+        String fechaLanzamiento = interfaz.leerTexto();
+        interfaz.imprimirMensaje("Imagen del album: ");
+        String imagenAlbum = interfaz.leerTexto();
+
+        Album nuevoAlbum = new Album();
+        nuevoAlbum.setNombre(nombreAlbum);
+        nuevoAlbum.setImagen(imagenAlbum);
+        nuevoAlbum.setFechalanzamiento(fechaLanzamiento);
+
+
+        boolean agregarcancion = true;
+        do {
+            interfaz.imprimirMensaje("Nombre de la canción: ");
+            String nombreCancion = interfaz.leerTexto();
+            Cancion unaCancion = gestor.encontrarCancion(nombreCancion);
+            interfaz.imprimirMensaje("Desea agregar otro artista (s/n");
+            String opcion = interfaz.leerTexto();
+            if (opcion.toLowerCase().equals("n")) {
+                agregarcancion = false;
+            }
+            gestor.agregarCancionaAlbum(nombreAlbum, unaCancion);
+        } while (agregarcancion);
+        gestor.guardarAlbum(nuevoAlbum);
+
+    }
+
+    public void listarAlbums() {
+        for (Album album : gestor.listarAlbums()
+        ) {
+            interfaz.imprimirMensaje(album.toString());
         }
     }
 

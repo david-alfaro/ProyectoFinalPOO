@@ -22,7 +22,9 @@ public class IU {
         output.println("11. Listar canciones");
         output.println("12. Crear lista de reproduccion");
         output.println("13. Listar listas de reproduccion");
-        output.println("14. Salir");
+        output.println("14. Crear Album");
+        output.println("15. Listar Albums");
+        output.println("16. Salir");
 
     }
 
@@ -38,6 +40,7 @@ public class IU {
     public String leerTexto() {
         return input.next();
     }
+
 
     public int leerNumeros() {
         return input.nextInt();
