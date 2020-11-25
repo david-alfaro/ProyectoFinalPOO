@@ -96,8 +96,7 @@ public class Controlador {
         interfaz.imprimirMensaje("Identificación: ");
         String identificacion = interfaz.leerTexto();
         if (edad >= 18) {
-            UsuarioFinal nuevoUsuario = new UsuarioFinal(nombre, apellido1, apellido2, nombreUsuario, correo, contrasenna, imagen, edad, pais, identificacion);
-            gestor.guardarUsuario(nuevoUsuario);
+            gestor.registroUsuario(nombre,apellido1,apellido2,nombreUsuario,correo,contrasenna,imagen,edad,pais,identificacion);
         } else {
             interfaz.imprimirMensaje("No se puede registrar el usario, debe ser mayor de edad");
         }
@@ -119,13 +118,13 @@ public class Controlador {
         interfaz.imprimirMensaje("Imagen de perfil o ávatar: ");
         String imagen = interfaz.leerTexto();
         Administrador admin = new Administrador(nombre, apellido1, apellido2, nombreUsuario, correo, contrasenna, imagen);
-        gestor.guardarUsuario(admin);
+
     }
 
     private void listarUsuarios() {
-        for (Usuario u : gestor.listaUsuarios()
+        for (UsuarioFinal ususario : gestor.listaRUsuarios()
         ) {
-            interfaz.imprimirMensaje(u.toString());
+            interfaz.imprimirMensaje(ususario.toCSVLine());
 
         }
     }

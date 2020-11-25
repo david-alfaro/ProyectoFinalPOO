@@ -1,6 +1,6 @@
 package alfaroviquez.david.bl.entidades;
 
-public class Usuario {
+public abstract class Usuario {
     protected String nombre;
     protected String apellido1;
     protected String apellido2;

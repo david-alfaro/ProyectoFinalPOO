@@ -47,4 +47,8 @@ public class UsuarioFinal extends Usuario{
                 ", identificacion='" + identificacion + '\'' +
                 "} " + super.toString();
     }
+
+    public String toCSVLine(){
+        return this.nombre+","+this.apellido1+","+this.apellido2+","+this.nombreUsuario+","+this.correo+","+this.contrasenna+","+this.edad+","+this.pais+","+this.identificacion;
+    }
 }

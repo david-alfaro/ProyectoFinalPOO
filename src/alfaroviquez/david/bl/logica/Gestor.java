@@ -1,13 +1,17 @@
 package alfaroviquez.david.bl.logica;
 
 import alfaroviquez.david.bl.entidades.*;
+import alfaroviquez.david.persistencia.UsuarioFinalDAO;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Gestor {
 
 
-    private ArrayList<Usuario> usuarios;
+
     private ArrayList<Artista> artistas;
     private ArrayList<Genero> generos;
     private ArrayList<Compositor> compositores;
@@ -15,25 +19,45 @@ public class Gestor {
     private ArrayList<ListaReproduccion> listasDeReproduccion;
     private ArrayList<Album> albums;
 
+    private final String DRIVER="com.mysql.cj.jdbc.Driver";
+    private final String DB_URL="jdbc:mysql://localhost:3306/musicapp";
+    private final String USER = "root";
+    private final String PWD = "12345";
+    private Connection connection;
+
+    private UsuarioFinalDAO repositorioUsuariosDB;
+
     public Gestor() {
 
-        this.usuarios = new ArrayList<>();
+
         this.artistas = new ArrayList<>();
         this.generos = new ArrayList<>();
         this.compositores = new ArrayList<>();
         this.canciones = new ArrayList<>();
         this.listasDeReproduccion = new ArrayList<>();
         this.albums = new ArrayList<>();
+
+
+        try{
+            Class.forName(DRIVER);
+            this.connection = DriverManager.getConnection(DB_URL,USER,PWD);
+            this.repositorioUsuariosDB=new UsuarioFinalDAO(this.connection);
+        }catch (Exception e){
+            System.out.println("No se puede conectar a las BD");
+            e.printStackTrace();
+        }
+    }
+
+    public void registroUsuario(String nombre, String apellido1, String apellido2, String nombreUsuario, String correo, String contrasenna, String imagen, int edad,String pais, String identificacion) {
+        UsuarioFinal nuevoUsuario = new UsuarioFinal(nombre,apellido1,apellido2,nombreUsuario,correo,contrasenna,imagen,edad,pais,identificacion);
+        repositorioUsuariosDB.resgitrarUsuario(nuevoUsuario);
+    }
+
+    public List<UsuarioFinal> listaRUsuarios(){
+        return this.repositorioUsuariosDB.listarUsuarios();
     }
 
 
-    public void guardarUsuario(Usuario usuario) {
-        usuarios.add(usuario);
-    }
-
-    public ArrayList<Usuario> listaUsuarios() {
-        return this.usuarios;
-    }
 
     public void guardarArtista(Artista artista){
         artistas.add(artista);
@@ -148,4 +172,6 @@ public class Gestor {
         }
         return prom;
     }
+
+
 }
