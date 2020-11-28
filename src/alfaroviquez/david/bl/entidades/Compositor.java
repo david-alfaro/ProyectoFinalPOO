@@ -66,4 +66,8 @@ public class Compositor {
                 ", paisNacimiento='" + paisNacimiento + '\'' +
                 '}';
     }
+
+    public String toCSVLine(){
+        return this.nombre+","+this.apellido1+","+this.apellido2+","+this.edad+","+this.paisNacimiento;
+    }
 }

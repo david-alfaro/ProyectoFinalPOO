@@ -33,4 +33,8 @@ public class Genero {
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
+
+    public String toCSVLine(){
+        return this.nombre+","+this.descripcion;
+    }
 }

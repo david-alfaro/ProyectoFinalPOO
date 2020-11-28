@@ -4,6 +4,7 @@ import alfaroviquez.david.bl.entidades.*;
 import alfaroviquez.david.bl.logica.Gestor;
 import alfaroviquez.david.iu.IU;
 
+import java.time.LocalDate;
 
 
 public class Controlador {
@@ -134,30 +135,40 @@ public class Controlador {
         String nombre = interfaz.leerTexto();
         interfaz.imprimirMensaje("Primer apellido: ");
         String apellido1 = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Segundo apellido: ");
-        String apellido2 = interfaz.leerTexto();
         interfaz.imprimirMensaje("Nombre artístico: ");
         String nombreArtistico = interfaz.leerTexto();
         interfaz.imprimirMensaje("Pais de origen: ");
         String pais = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Genero: ");
-        String genero = interfaz.leerTexto();
         interfaz.imprimirMensaje("Edad: ");
         int edad = interfaz.leerNumeros();
         interfaz.imprimirMensaje("Descripción: ");
         String descripcion = interfaz.leerTexto();
         interfaz.imprimirMensaje("Fecha de nacimiento: ");
         String fechaNacimiento = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Fecha de defunción: ");
-        String fechaDefuncion = interfaz.leerTexto();
-        Artista nuevoArtista = new Artista(nombre, apellido1, apellido2, nombreArtistico, pais, genero, edad, descripcion, fechaNacimiento, fechaDefuncion);
-        gestor.guardarArtista(nuevoArtista);
+        LocalDate fechaNac = obtenerFecha(fechaNacimiento);
+        interfaz.imprimirMensaje("Fallecido? (s/n) ");
+        String respuesta = interfaz.leerTexto();
+        LocalDate fechaDef = null;
+        String fechaDefuncion ="";
+        if(respuesta.equalsIgnoreCase("s")){
+            interfaz.imprimirMensaje("Fecha de defunción: ");
+            fechaDefuncion = interfaz.leerTexto();
+            fechaDef = obtenerFecha(fechaDefuncion);
+
+        }else{
+
+            fechaDef = null;
+        }
+
+        gestor.registroArtistas(nombre,apellido1,nombreArtistico,pais,edad,descripcion,fechaNac,fechaDef);
+        interfaz.imprimirMensaje("Artista registrado");
+
     }
 
     private void listarArtistas() {
         for (Artista artista : gestor.listarArtistas()
         ) {
-            interfaz.imprimirMensaje(artista.toString());
+            interfaz.imprimirMensaje(artista.toCSVLine());
         }
     }
 
@@ -166,14 +177,14 @@ public class Controlador {
         String nombre = interfaz.leerTexto();
         interfaz.imprimirMensaje("Descripción: ");
         String descripcion = interfaz.leerTexto();
-        Genero nuevoGenero = new Genero(nombre, descripcion);
-        gestor.guardarGenero(nuevoGenero);
+        gestor.guardarGenero(nombre,descripcion);
+        interfaz.imprimirMensaje("Genero musical resitrado con exito");
     }
 
     private void listarGeneros() {
         for (Genero genero : gestor.listaGeneros()
         ) {
-            interfaz.imprimirMensaje(genero.toString());
+            interfaz.imprimirMensaje(genero.toCSVLine());
         }
     }
 
@@ -188,14 +199,14 @@ public class Controlador {
         int edad = interfaz.leerNumeros();
         interfaz.imprimirMensaje("Pais de origen: ");
         String pais = interfaz.leerTexto();
-        Compositor nuevoCompositor = new Compositor(nombre, apellido1, apellido2, edad, pais);
-        gestor.guardarCompositor(nuevoCompositor);
+        gestor.registroCompositor(nombre,apellido1,apellido2,edad,pais);
+        interfaz.imprimirMensaje("Compositor registrado");
     }
 
     private void listarCompositores() {
-        for (Compositor comp : gestor.listaCompositores()
+        for (Compositor comp : gestor.listarCompositores()
         ) {
-            interfaz.imprimirMensaje(comp.toString());
+            interfaz.imprimirMensaje(comp.toCSVLine());
 
         }
     }
@@ -318,5 +329,8 @@ public class Controlador {
         }
     }
 
+    private LocalDate obtenerFecha(String fecha){
+        return LocalDate.parse(fecha);
+    }
 
 }
