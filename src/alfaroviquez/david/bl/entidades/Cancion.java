@@ -1,13 +1,18 @@
 package alfaroviquez.david.bl.entidades;
 
+import java.time.LocalDate;
+
+/***
+ * Esta clase crea un objeto de tipo Cancion
+ * @author David Alfaro V
+ * @version 1.0
+ * @since 20/11/2020
+ */
 public class Cancion {
-    private  String nombre;
-    private Genero genero;
-    private Artista artista;
-    private Compositor compositor;
-    private String album;
-    private String fechaLanzamiento;
-    private  int calificacion;
+    private String nombre;
+    private String mp3;
+    private LocalDate fechaLanzamiento;
+
 
     public String getNombre() {
         return nombre;
@@ -17,77 +22,49 @@ public class Cancion {
         this.nombre = nombre;
     }
 
-    public Genero getGenero() {
-        return genero;
+    public String getMp3() {
+        return mp3;
     }
 
-    public void setGenero(Genero genero) {
-        this.genero = genero;
+    public void setMp3(String mp3) {
+        this.mp3 = mp3;
     }
 
-    public Artista getArtista() {
-        return artista;
-    }
-
-    public void setArtista(Artista artista) {
-        this.artista = artista;
-    }
-
-    public Compositor getCompositor() {
-        return compositor;
-    }
-
-    public void setCompositor(Compositor compositor) {
-        this.compositor = compositor;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
-    }
-
-    public String getFechaLanzamiento() {
+    public LocalDate getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
-    public void setFechaLanzamiento(String fechaLanzamiento) {
+    public void setFechaLanzamiento(LocalDate fechaLanzamiento) {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
-    public int getCalificacion() {
-        return calificacion;
-    }
-
-    public void setCalificacion(int calificacion) {
-        this.calificacion = calificacion;
-    }
 
     public Cancion() {
     }
 
-    public Cancion(String nombre, Genero genero, Artista artista, Compositor compositor, String album, String fechaLanzamiento, int calificacion) {
+    /***
+     * Constructor de la clase
+     * @param nombre este parametro se refiere al nombre de la cancion
+     * @param mp3 este parametro se refiere al archivo mp3 de la cancion
+     * @param fechaLanzamiento este parametro se refiere a la fecha de lanzamiento de la cancion
+     */
+    public Cancion(String nombre, String mp3, LocalDate fechaLanzamiento) {
         this.nombre = nombre;
-        this.genero = genero;
-        this.artista = artista;
-        this.compositor = compositor;
-        this.album = album;
+        this.mp3 = mp3;
         this.fechaLanzamiento = fechaLanzamiento;
-        this.calificacion = calificacion;
+
     }
 
     @Override
     public String toString() {
         return "Cancion{" +
                 "nombre='" + nombre + '\'' +
-                ", genero=" + genero +
-                ", artista=" + artista +
-                ", compositor=" + compositor +
-                ", album='" + album + '\'' +
+                "mp3='" + mp3 + '\'' +
                 ", fechaLanzamiento='" + fechaLanzamiento + '\'' +
-                ", calificacion=" + calificacion +
                 '}';
+    }
+
+    public String toCSVLine() {
+        return this.nombre + "," + this.mp3 + "," + this.fechaLanzamiento;
     }
 }

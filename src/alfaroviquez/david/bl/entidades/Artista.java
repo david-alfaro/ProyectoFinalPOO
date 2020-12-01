@@ -2,6 +2,12 @@ package alfaroviquez.david.bl.entidades;
 
 import java.time.LocalDate;
 
+/***
+ * Esta clase define un objeto de tipo artista
+ * @author David Alfaro
+ * @version 1.0
+ * @since 28/11/2020
+ */
 public class Artista {
     private String nombre;
     private  String apellido1;
@@ -80,6 +86,19 @@ public class Artista {
     }
 
     public  Artista(){}
+
+    /***
+     * Constructor de la clase
+     *
+     * @param nombre este parametro define el nombre del artista
+     * @param apellido1 este parametro define el primer apellido del artista
+     * @param nombreArtistico este parametro define el nombre artistito
+     * @param paisNacimiento este parametro define el pais de nacimiento del artista
+     * @param edad este parametro define la edad que tiene el artista
+     * @param descripcion este parametro es una descripcion adicional para el artista
+     * @param fechaNacimiento este parametro define la fecha de nacimiento
+     * @param fechaDefuncion este parametro define la fecha de defuncion, aplica solamente si el artista ha fallecido
+     */
     public Artista(String nombre, String apellido1,String nombreArtistico, String paisNacimiento, int edad, String descripcion, LocalDate fechaNacimiento, LocalDate fechaDefuncion) {
         this.nombre = nombre;
         this.apellido1 = apellido1;

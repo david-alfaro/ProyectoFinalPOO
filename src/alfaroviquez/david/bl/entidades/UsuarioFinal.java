@@ -1,5 +1,12 @@
 package alfaroviquez.david.bl.entidades;
 
+/***
+ * Esta clase define un objeto de tipo Usuario
+ *
+ * @author David Alfaro
+ * @version 1.0
+ * @since 28/11/2020
+ */
 public class UsuarioFinal extends Usuario{
     private int edad;
     private String pais;
@@ -32,6 +39,20 @@ public class UsuarioFinal extends Usuario{
     public UsuarioFinal() {
     }
 
+    /***
+     * Constructor de la clase UsuarioFinal
+     *
+     * @param nombre este parametro define el nombre que va a tneer el usuario
+     * @param apellido1 este parametro define el primero apellido del usuario
+     * @param apellido2 este parametro define el segundo apellido del usuario
+     * @param nombreUsuario este parametro define el nombre de usuario del usuario
+     * @param correo este parametro define el correo electronico que indique el usuario
+     * @param contrasenna este parametro define la contrasenna indicada por el usuario
+     * @param imagen este parametro es la imagen de perfil
+     * @param edad este parametro define la edad del usuario
+     * @param pais este parametro define el pais en donde se encuentra el usuario
+     * @param identificacion este parametro define la identificacion del usuario
+     */
     public UsuarioFinal(String nombre, String apellido1, String apellido2, String nombreUsuario, String correo, String contrasenna, String imagen, int edad, String pais, String identificacion) {
         super(nombre, apellido1, apellido2, nombreUsuario, correo, contrasenna, imagen);
         this.edad = edad;

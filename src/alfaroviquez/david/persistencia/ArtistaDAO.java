@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ public class ArtistaDAO {
     }
 
     public void registrarArtista(Artista artista){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try{
             Statement statement = con.createStatement();
             StringBuilder sentence = new StringBuilder("insert into artista (nombreArtista,apellido1,nombreArtistico,pais,fechaNacimiento,fechaDefuncion,edad,descripcion)");
@@ -32,9 +35,9 @@ public class ArtistaDAO {
             sentence.append(artista.getPaisNacimiento());
             sentence.append("','");
             sentence.append(artista.getFechaNacimiento());
-            sentence.append("','");
-            sentence.append(artista.getFechaDefuncion());
             sentence.append("',");
+            sentence.append(artista.getFechaDefuncion()==null ? null:"'"+artista.getFechaDefuncion()+"'");
+            sentence.append(",");
             sentence.append(artista.getEdad());
             sentence.append(",'");
             sentence.append(artista.getDescripcion());

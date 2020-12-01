@@ -1,5 +1,11 @@
 package alfaroviquez.david.bl.entidades;
 
+/***
+ * Esta clase define un objeto de tipo compositor
+ * @author David Alfaro
+ * @version 1.0
+ * @since 28/11/2020
+ */
 public class Compositor {
     private String nombre;
     private String apellido1;
@@ -48,6 +54,15 @@ public class Compositor {
     }
     public Compositor(){}
 
+    /***
+     * Constructor de la clase Compositor
+     *
+     * @param nombre este parametro defien el nombre del compositor
+     * @param apellido1 este parametro define el primer apellido del compositor
+     * @param apellido2 este parametro define el segundo apellido del compositor
+     * @param edad este parametro define la edad del compositor
+     * @param paisNacimiento este parametro define el pais de nacimiento del compositor
+     */
     public Compositor(String nombre, String apellido1, String apellido2, int edad, String paisNacimiento) {
         this.nombre = nombre;
         this.apellido1 = apellido1;

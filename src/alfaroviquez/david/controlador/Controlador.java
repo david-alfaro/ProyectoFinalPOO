@@ -157,7 +157,6 @@ public class Controlador {
 
         }else{
 
-            fechaDef = null;
         }
 
         gestor.registroArtistas(nombre,apellido1,nombreArtistico,pais,edad,descripcion,fechaNac,fechaDef);
@@ -214,23 +213,13 @@ public class Controlador {
     private void registrarCancion() {
         interfaz.imprimirMensaje("Nombre de la canción: ");
         String nombreCancion = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Nombre del género: ");
-        String nombreGenero = interfaz.leerTexto();
-        Genero unGenero = gestor.encontrarGenero(nombreGenero);
-        interfaz.imprimirMensaje("Nombre del artista: ");
-        String nombreArtista = interfaz.leerTexto();
-        Artista unArtista = gestor.encontrarArtista(nombreArtista);
-        interfaz.imprimirMensaje("Nombre compositor: ");
-        String nombreCompositor = interfaz.leerTexto();
-        Compositor unCompositor = gestor.encontrarCompositor(nombreCompositor);
-        interfaz.imprimirMensaje("Nombre del album: ");
-        String nombreAlbum = interfaz.leerTexto();
         interfaz.imprimirMensaje("Fecha lanzamiento: ");
         String fecha = interfaz.leerTexto();
-        interfaz.imprimirMensaje("Calificación: ");
-        int calificacion = interfaz.leerNumeros();
-        Cancion nuevaCancion = new Cancion(nombreCancion, unGenero, unArtista, unCompositor, nombreAlbum, fecha, calificacion);
-        gestor.guardarCancion(nuevaCancion);
+        interfaz.imprimirMensaje("Ingrese la cancion-->");
+        //en estos momentos se esta probando con un string como link de la cancion
+        String mp3 = interfaz.leerTexto();
+        LocalDate fechaLanzamiento = obtenerFecha(fecha);
+        gestor.guardarCancion(nombreCancion,mp3,fechaLanzamiento);
         interfaz.imprimirMensaje("Cancion creada!");
 
 
@@ -240,7 +229,7 @@ public class Controlador {
         interfaz.imprimirMensaje("Lista de canciones --> ");
         for (Cancion cancion : gestor.listaCanciones()
         ) {
-            interfaz.imprimirMensaje(cancion.toString());
+            interfaz.imprimirMensaje(cancion.toCSVLine());
         }
     }
 

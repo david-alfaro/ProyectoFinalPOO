@@ -1,10 +1,7 @@
 package alfaroviquez.david.bl.logica;
 
 import alfaroviquez.david.bl.entidades.*;
-import alfaroviquez.david.persistencia.ArtistaDAO;
-import alfaroviquez.david.persistencia.CompositorDAO;
-import alfaroviquez.david.persistencia.GeneroDAO;
-import alfaroviquez.david.persistencia.UsuarioFinalDAO;
+import alfaroviquez.david.persistencia.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,6 +28,7 @@ public class Gestor {
     private CompositorDAO repositorioCompositoresDB;
     private ArtistaDAO repositorioArtistasDB;
     private GeneroDAO repositorioGeneroBD;
+    private CancionDAO repositiorCancionesBD;
 
     public Gestor() {
 
@@ -49,6 +47,7 @@ public class Gestor {
             this.repositorioCompositoresDB = new CompositorDAO(this.connection);
             this.repositorioArtistasDB = new ArtistaDAO(this.connection);
             this.repositorioGeneroBD = new GeneroDAO(this.connection);
+            this.repositiorCancionesBD = new CancionDAO(this.connection);
         } catch (Exception e) {
             System.out.println("No se puede conectar a las BD");
             e.printStackTrace();
@@ -69,42 +68,44 @@ public class Gestor {
         repositorioCompositoresDB.registrarCompositor(nuevoCompositor);
 
     }
-    public List<Compositor> listarCompositores(){
+
+    public List<Compositor> listarCompositores() {
         return this.repositorioCompositoresDB.encontrarCompositores();
     }
 
-    public void registroArtistas(String nombre, String apellido1, String nombreArtistico, String paisNacimiento, int edad, String descripcion, LocalDate fechaNacimiento,LocalDate fechaDefuncion) {
-        Artista nuevoArtista = new Artista(nombre,apellido1,nombreArtistico,paisNacimiento,edad,descripcion,fechaNacimiento,fechaDefuncion);
+    public void registroArtistas(String nombre, String apellido1, String nombreArtistico, String paisNacimiento, int edad, String descripcion, LocalDate fechaNacimiento, LocalDate fechaDefuncion) {
+        Artista nuevoArtista = new Artista(nombre, apellido1, nombreArtistico, paisNacimiento, edad, descripcion, fechaNacimiento, fechaDefuncion);
         repositorioArtistasDB.registrarArtista(nuevoArtista);
 
     }
 
-    public List<Artista>listarArtistas(){
+    public List<Artista> listarArtistas() {
         return this.repositorioArtistasDB.encontrarArtista();
     }
 
 
-    public void guardarGenero(String nombre, String descripcion){
-        Genero nuevoGenero = new Genero(nombre,descripcion);
+    public void guardarGenero(String nombre, String descripcion) {
+        Genero nuevoGenero = new Genero(nombre, descripcion);
         repositorioGeneroBD.registrarGenero(nuevoGenero);
     }
 
-    public List<Genero> listaGeneros(){
+    public List<Genero> listaGeneros() {
         return this.repositorioGeneroBD.encontrarGeneros();
     }
 
 
-
     //public ArrayList<Compositor> listaCompositores() {
-        //return this.compositores;
+    //return this.compositores;
     //}
 
-    public void guardarCancion(Cancion cancion) {
-        canciones.add(cancion);
+    public void guardarCancion(String nombre, String mp3, LocalDate fechaLanzamiento) {
+        Cancion nuevaCancion = new Cancion(nombre,mp3,fechaLanzamiento);
+        repositiorCancionesBD.registrarCancion(nuevaCancion);
     }
 
-    public ArrayList<Cancion> listaCanciones() {
-        return this.canciones;
+    public List<Cancion> listaCanciones() {
+
+        return this.repositiorCancionesBD.encontrarCanciones();
     }
 
 
@@ -118,7 +119,6 @@ public class Gestor {
         }
         return null;
     }
-
 
 
     public Genero encontrarGenero(String nombre) {
@@ -192,18 +192,6 @@ public class Gestor {
                 albumActual.getArtistas().add(artista);
             }
         }
-    }
-
-    public float puntajeLista(ListaReproduccion lista) {
-        float prom = 0;
-        for (int i = 0; i < lista.getCanciones().size(); i++) {
-            Cancion cancion = lista.getCanciones().get(i);
-            int calificacion = cancion.getCalificacion();
-            int sumaCal = 0;
-            sumaCal = calificacion + sumaCal;
-            prom = sumaCal / lista.getCanciones().size();
-        }
-        return prom;
     }
 
 

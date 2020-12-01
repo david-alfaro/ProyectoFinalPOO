@@ -1,5 +1,12 @@
 package alfaroviquez.david.bl.entidades;
 
+/***
+ * Esta clase define un objeto de tipo Genero
+ *
+ * @author David Alfaro
+ * @version 1.0
+ * @since 28/11/2020
+ */
 public class Genero {
     private String nombre;
     private String descripcion;
@@ -21,6 +28,12 @@ public class Genero {
     }
     public Genero(){}
 
+    /***
+     * Constructor de la clase Genero
+     *
+     * @param nombre este parametro define el nombre del genero que se esta instanciando
+     * @param descripcion este parametro define el una descripcion para el nuevo genero
+     */
     public Genero(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;

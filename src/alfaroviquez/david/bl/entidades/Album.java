@@ -2,6 +2,12 @@ package alfaroviquez.david.bl.entidades;
 
 import java.util.ArrayList;
 
+/***
+ * Esta clase define un objeto de tipo album
+ * @author David Alfaro v
+ * @version 1.0
+ * @since 28/11/2020
+ */
 public class Album {
     private String nombre;
     private ArrayList<Artista> artistas;
@@ -50,6 +56,14 @@ public class Album {
     }
     public Album(){}
 
+    /***
+     * Constructor de la clase
+     * @param nombre del album
+     * @param artistas que estan en el album
+     * @param fechalanzamiento del album
+     * @param imagen del album
+     * @param canciones que estan en el album
+     */
     public Album(String nombre, ArrayList<Artista> artistas, String fechalanzamiento, String imagen, ArrayList<Cancion> canciones) {
         this.nombre = nombre;
         this.artistas = artistas;
