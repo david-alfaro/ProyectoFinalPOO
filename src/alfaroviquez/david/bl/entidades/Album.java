@@ -1,5 +1,6 @@
 package alfaroviquez.david.bl.entidades;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /***
@@ -10,10 +11,10 @@ import java.util.ArrayList;
  */
 public class Album {
     private String nombre;
-    private ArrayList<Artista> artistas;
-    private String fechalanzamiento;
+    private LocalDate fechalanzamiento;
     private String imagen;
     private ArrayList<Cancion> canciones;
+
 
     public ArrayList<Cancion> getCanciones() {
         return canciones;
@@ -31,19 +32,11 @@ public class Album {
         this.nombre = nombre;
     }
 
-    public ArrayList<Artista> getArtistas() {
-        return artistas;
-    }
-
-    public void setArtistas(ArrayList<Artista> artistas) {
-        this.artistas = artistas;
-    }
-
-    public String getFechalanzamiento() {
+    public LocalDate getFechalanzamiento() {
         return fechalanzamiento;
     }
 
-    public void setFechalanzamiento(String fechalanzamiento) {
+    public void setFechalanzamiento(LocalDate fechalanzamiento) {
         this.fechalanzamiento = fechalanzamiento;
     }
 
@@ -59,14 +52,12 @@ public class Album {
     /***
      * Constructor de la clase
      * @param nombre del album
-     * @param artistas que estan en el album
      * @param fechalanzamiento del album
      * @param imagen del album
-     * @param canciones que estan en el album
+     * @param canciones este parametro se refiere a la lista de canciones que pertenecen al album
      */
-    public Album(String nombre, ArrayList<Artista> artistas, String fechalanzamiento, String imagen, ArrayList<Cancion> canciones) {
+    public Album(String nombre, LocalDate fechalanzamiento, String imagen, ArrayList<Cancion> canciones) {
         this.nombre = nombre;
-        this.artistas = artistas;
         this.fechalanzamiento = fechalanzamiento;
         this.imagen = imagen;
         this.canciones = canciones;
@@ -76,8 +67,7 @@ public class Album {
     public String toString() {
         return "Album{" +
                 "nombre='" + nombre + '\'' +
-                ", artistas=" + artistas +
-                ", fechalanzamiento='" + fechalanzamiento + '\'' +
+                ", fechalanzamiento=" + fechalanzamiento +
                 ", imagen='" + imagen + '\'' +
                 ", canciones=" + canciones +
                 '}';

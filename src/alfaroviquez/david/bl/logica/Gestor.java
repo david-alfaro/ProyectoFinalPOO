@@ -185,14 +185,7 @@ public class Gestor {
         }
     }
 
-    public void agregarArtista(String nombre, Artista artista) {
-        for (int i = 0; i < albums.size(); i++) {
-            Album albumActual = albums.get(i);
-            if (albumActual.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
-                albumActual.getArtistas().add(artista);
-            }
-        }
-    }
+    
 
 
 }

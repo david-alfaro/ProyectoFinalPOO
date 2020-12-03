@@ -292,7 +292,7 @@ public class Controlador {
         Album nuevoAlbum = new Album();
         nuevoAlbum.setNombre(nombreAlbum);
         nuevoAlbum.setImagen(imagenAlbum);
-        nuevoAlbum.setFechalanzamiento(fechaLanzamiento);
+       // nuevoAlbum.setFechalanzamiento(fechaLanzamiento);
 
 
         boolean agregarcancion = true;
