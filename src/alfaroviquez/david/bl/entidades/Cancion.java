@@ -9,10 +9,18 @@ import java.time.LocalDate;
  * @since 20/11/2020
  */
 public class Cancion {
+    private int id;
     private String nombre;
     private String mp3;
     private LocalDate fechaLanzamiento;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -58,13 +66,14 @@ public class Cancion {
     @Override
     public String toString() {
         return "Cancion{" +
-                "nombre='" + nombre + '\'' +
-                "mp3='" + mp3 + '\'' +
-                ", fechaLanzamiento='" + fechaLanzamiento + '\'' +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", mp3='" + mp3 + '\'' +
+                ", fechaLanzamiento=" + fechaLanzamiento +
                 '}';
     }
 
     public String toCSVLine() {
-        return this.nombre + "," + this.mp3 + "," + this.fechaLanzamiento;
+        return this.id+","+this.nombre + "," + this.mp3 + "," + this.fechaLanzamiento;
     }
 }

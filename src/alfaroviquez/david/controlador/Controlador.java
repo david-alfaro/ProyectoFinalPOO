@@ -17,7 +17,7 @@ public class Controlador {
             interfaz.menu();
             opcion = interfaz.leerOpcion();
             procesarOpcion(opcion);
-        } while (opcion != 16);
+        } while (opcion != 0);
     }
 
     private void procesarOpcion(int opcion) {
@@ -68,6 +68,9 @@ public class Controlador {
                 listarAlbums();
                 break;
             case 16:
+                agregarCancionAAlbum();
+                break;
+            case 0:
                 break;
             default:
                 interfaz.imprimirMensaje("Opción inválida");
@@ -271,51 +274,35 @@ public class Controlador {
     public void crearAlbum() {
         interfaz.imprimirMensaje("Nombre del album: ");
         String nombreAlbum = interfaz.leerTexto();
-
-        boolean agregarArtista = true;
-        do {
-            interfaz.imprimirMensaje("Nombre del artista: ");
-            String nombreArtista = interfaz.leerTexto();
-            Artista artista = gestor.encontrarArtista(nombreArtista);
-            interfaz.imprimirMensaje("Desea agregar otro artista (s/n");
-            String opcion = interfaz.leerTexto();
-            if (opcion.toLowerCase().equals("n")) {
-                agregarArtista = false;
-            }
-            gestor.agregarArtista(nombreAlbum, artista);
-        } while (agregarArtista);
         interfaz.imprimirMensaje("Fecha de lanzamiento: ");
-        String fechaLanzamiento = interfaz.leerTexto();
+        String fecha = interfaz.leerTexto();
+        LocalDate fechaLanzamiento = obtenerFecha(fecha);
         interfaz.imprimirMensaje("Imagen del album: ");
+        //De momento la imagen se maneja escribiendo un String
         String imagenAlbum = interfaz.leerTexto();
-
-        Album nuevoAlbum = new Album();
-        nuevoAlbum.setNombre(nombreAlbum);
-        nuevoAlbum.setImagen(imagenAlbum);
-       // nuevoAlbum.setFechalanzamiento(fechaLanzamiento);
-
-
-        boolean agregarcancion = true;
-        do {
-            interfaz.imprimirMensaje("Nombre de la canción: ");
-            String nombreCancion = interfaz.leerTexto();
-            Cancion unaCancion = gestor.encontrarCancion(nombreCancion);
-            interfaz.imprimirMensaje("Desea agregar otro artista (s/n");
-            String opcion = interfaz.leerTexto();
-            if (opcion.toLowerCase().equals("n")) {
-                agregarcancion = false;
-            }
-            gestor.agregarCancionaAlbum(nombreAlbum, unaCancion);
-        } while (agregarcancion);
-        gestor.guardarAlbum(nuevoAlbum);
+        gestor.guardarAlbum(nombreAlbum,fechaLanzamiento,imagenAlbum);
+        interfaz.imprimirMensaje("Nuevo Album ha sido creado");
 
     }
 
     public void listarAlbums() {
         for (Album album : gestor.listarAlbums()
         ) {
-            interfaz.imprimirMensaje(album.toString());
+            interfaz.imprimirMensaje(album.toCSVLine());
         }
+    }
+
+    public void agregarCancionAAlbum(){
+        interfaz.imprimirMensaje("Escoja una cancion: ");
+        listarCanciones();
+        interfaz.imprimirMensaje("Ingrese el nombre de la cancion a agregar");
+        String nombreCancion = interfaz.leerTexto();
+        interfaz.imprimirMensaje("Escoja un album: ");
+        listarAlbums();
+        interfaz.imprimirMensaje("Ingrese el nombre del album al que se le agregara la cancion: ");
+        String nombreAlbum = interfaz.leerTexto();
+        gestor.agregarCancionaAlbum(nombreCancion,nombreAlbum);
+        interfaz.imprimirMensaje("Se agrego la cancion "+nombreCancion+" al album "+nombreAlbum);
     }
 
     private LocalDate obtenerFecha(String fecha){

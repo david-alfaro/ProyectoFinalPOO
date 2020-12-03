@@ -10,11 +10,19 @@ import java.util.ArrayList;
  * @since 28/11/2020
  */
 public class Album {
+    private int id;
     private String nombre;
     private LocalDate fechalanzamiento;
     private String imagen;
     private ArrayList<Cancion> canciones;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public ArrayList<Cancion> getCanciones() {
         return canciones;
@@ -66,10 +74,15 @@ public class Album {
     @Override
     public String toString() {
         return "Album{" +
-                "nombre='" + nombre + '\'' +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", fechalanzamiento=" + fechalanzamiento +
                 ", imagen='" + imagen + '\'' +
                 ", canciones=" + canciones +
                 '}';
+    }
+
+    public String toCSVLine(){
+        return this.id+","+this.nombre+","+this.fechalanzamiento+","+this.imagen;
     }
 }

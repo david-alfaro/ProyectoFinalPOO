@@ -17,7 +17,8 @@ public class AlbumDAO {
         this.con=cnx;
     }
 
-    public void registrarAlbum(Album album){
+    public int registrarAlbum(Album album){
+        int indicealbum = -1;
         try{
             Statement statement = con.createStatement();
             StringBuilder query = new StringBuilder("insert into album (nombreAlbum,imagenAlbum,fechaLanzamiento)");
@@ -28,10 +29,15 @@ public class AlbumDAO {
             query.append("','");
             query.append(album.getFechalanzamiento());
             query.append("')");
-            statement.execute(query.toString());
+            statement.execute(query.toString(), statement.RETURN_GENERATED_KEYS);
+            ResultSet getGeneratedKeys = statement.getGeneratedKeys();
+            while (getGeneratedKeys.next()){
+                indicealbum = getGeneratedKeys.getInt(1);
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return indicealbum;
     }
 
     public List<Album> listaDeAlbums(){

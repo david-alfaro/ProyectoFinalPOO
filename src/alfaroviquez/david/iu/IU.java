@@ -24,7 +24,8 @@ public class IU {
         output.println("13. Listar listas de reproduccion");
         output.println("14. Crear Album");
         output.println("15. Listar Albums");
-        output.println("16. Salir");
+        output.println("16. Asignar cancion a album");
+        output.println("0. Salir");
 
     }
 

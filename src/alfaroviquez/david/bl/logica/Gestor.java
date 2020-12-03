@@ -29,6 +29,9 @@ public class Gestor {
     private ArtistaDAO repositorioArtistasDB;
     private GeneroDAO repositorioGeneroBD;
     private CancionDAO repositiorCancionesBD;
+    private AlbumDAO repositorioAlbumBD;
+
+    private AlbumXCancionDAO repoAlbumXCancionBD;
 
     public Gestor() {
 
@@ -48,6 +51,8 @@ public class Gestor {
             this.repositorioArtistasDB = new ArtistaDAO(this.connection);
             this.repositorioGeneroBD = new GeneroDAO(this.connection);
             this.repositiorCancionesBD = new CancionDAO(this.connection);
+            this.repositorioAlbumBD = new AlbumDAO(this.connection);
+            this.repoAlbumXCancionBD = new AlbumXCancionDAO(this.connection);
         } catch (Exception e) {
             System.out.println("No se puede conectar a las BD");
             e.printStackTrace();
@@ -100,7 +105,8 @@ public class Gestor {
 
     public void guardarCancion(String nombre, String mp3, LocalDate fechaLanzamiento) {
         Cancion nuevaCancion = new Cancion(nombre,mp3,fechaLanzamiento);
-        repositiorCancionesBD.registrarCancion(nuevaCancion);
+        nuevaCancion.setId(repositiorCancionesBD.registrarCancion(nuevaCancion));
+        System.out.println(nuevaCancion.getId());
     }
 
     public List<Cancion> listaCanciones() {
@@ -132,8 +138,9 @@ public class Gestor {
     }
 
     public Artista encontrarArtista(String nombre) {
-        for (int i = 0; i < artistas.size(); i++) {
-            Artista temp = artistas.get(i);
+        List<Artista> listaDEArtistas = listarArtistas();
+        for (int i = 0; i < listaDEArtistas.size(); i++) {
+            Artista temp = listaDEArtistas.get(i);
             if (temp.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
                 return temp;
             }
@@ -159,8 +166,19 @@ public class Gestor {
     }
 
     public Cancion encontrarCancion(String nombre) {
-        for (int i = 0; i < canciones.size(); i++) {
-            Cancion temp = canciones.get(i);
+        List<Cancion> listaDECanciones = listaCanciones();
+        for (int i = 0; i < listaDECanciones.size(); i++) {
+            Cancion temp = listaDECanciones.get(i);
+            if (temp.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+                return temp;
+            }
+        }
+        return null;
+    }
+    public Album encontrarAlbum(String nombre){
+        List<Album> listaDEAlbums = listarAlbums();
+        for (int i = 0; i < listaDEAlbums.size(); i++) {
+            Album temp = listaDEAlbums.get(i);
             if (temp.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
                 return temp;
             }
@@ -168,24 +186,25 @@ public class Gestor {
         return null;
     }
 
-    public void guardarAlbum(Album album) {
-        albums.add(album);
+    public void guardarAlbum(String nombre, LocalDate fechalanzamiento, String imagen) {
+        Album nuevoAlbum = new Album(nombre,fechalanzamiento,imagen,new ArrayList<>());
+        nuevoAlbum.setId(repositorioAlbumBD.registrarAlbum(nuevoAlbum));
+
     }
 
-    public ArrayList<Album> listarAlbums() {
-        return this.albums;
+    public List<Album> listarAlbums() {
+
+        return this.repositorioAlbumBD.listaDeAlbums();
     }
 
-    public void agregarCancionaAlbum(String nombreAlbum, Cancion cancion) {
-        for (int i = 0; i < albums.size(); i++) {
-            Album albumActual = albums.get(i);
-            if (albumActual.getNombre().toLowerCase().equals(nombreAlbum.toLowerCase())) {
-                albumActual.getCanciones().add(cancion);
-            }
-        }
+    public void agregarCancionaAlbum(String nombreCancion,String nombreAlbum) {
+        Cancion unaCancion = encontrarCancion(nombreCancion);
+        Album unAlbum = encontrarAlbum(nombreAlbum);
+        repoAlbumXCancionBD.guardarAlbum(unAlbum,unaCancion);
+
     }
 
-    
+
 
 
 }
