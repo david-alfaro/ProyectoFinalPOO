@@ -1,5 +1,11 @@
 package alfaroviquez.david.bl.entidades;
 
+/**
+ * Esta es una clase abstracta de tipo Usuario, es la clase padre
+ * @author David Alfaro
+ * @version 1.0
+ * @since 02/12/2020
+ */
 public abstract class Usuario {
     protected String nombre;
     protected String apellido1;
@@ -68,6 +74,16 @@ public abstract class Usuario {
     public Usuario() {
     }
 
+    /**
+     * Constructor de la clase
+     * @param nombre este parametro hace referencia al nombre del usuario
+     * @param apellido1 este parametro hace referencia al primer apellido del usuario
+     * @param apellido2 este parametro hace referencia al segundo apellido del usuario
+     * @param nombreUsuario este parametro hace referencia al nombre de usuario dentro de la aplicacion
+     * @param correo este parametro hace referencia al correo del usuario
+     * @param contrasenna este parametro hace referencia a la contrasenna  del usuario
+     * @param imagen este parametro hace referencia a la imagen de perfil del usuario
+     */
     public Usuario(String nombre, String apellido1, String apellido2, String nombreUsuario, String correo, String contrasenna, String imagen) {
         this.nombre = nombre;
         this.apellido1 = apellido1;

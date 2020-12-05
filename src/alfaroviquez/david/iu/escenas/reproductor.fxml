@@ -13,7 +13,6 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -168,12 +167,20 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </VBox.margin>
             </Label>
+            <Label layoutX="20.0" layoutY="220.0" prefHeight="62.0" prefWidth="143.0" text="Listas" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
             <Label text="Cerrar sesión" textFill="WHITE">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
                </font>
                <VBox.margin>
-                  <Insets left="15.0" top="200.0" />
+                  <Insets bottom="10.0" left="15.0" top="200.0" />
                </VBox.margin>
             </Label>
          </children>
