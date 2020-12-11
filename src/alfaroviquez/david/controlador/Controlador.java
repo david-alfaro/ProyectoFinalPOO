@@ -4,7 +4,9 @@ import alfaroviquez.david.bl.entidades.*;
 import alfaroviquez.david.bl.logica.Gestor;
 import alfaroviquez.david.iu.IU;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Period;
 
 
 public class Controlador {
@@ -26,7 +28,7 @@ public class Controlador {
                 crearAdmin();
                 break;
             case 2:
-                registrarUsuario();
+                //registrarUsuario();
                 break;
             case 3:
                 listarUsuarios();
@@ -78,7 +80,8 @@ public class Controlador {
     }
 
 
-    private void registrarUsuario() {
+    public void registrarUsuario(String nombre, String apellido1, String apellido2, String nombreUsuario, String correo, String contrasenna, String imagen,LocalDate fechaNac, String pais, String identificacion ) {
+        /*
         interfaz.imprimirMensaje("Nombre: ");
         String nombre = interfaz.leerTexto();
         interfaz.imprimirMensaje("Primer apellido: ");
@@ -103,7 +106,9 @@ public class Controlador {
             gestor.registroUsuario(nombre,apellido1,apellido2,nombreUsuario,correo,contrasenna,imagen,edad,pais,identificacion);
         } else {
             interfaz.imprimirMensaje("No se puede registrar el usario, debe ser mayor de edad");
-        }
+        }*/
+        int edadUser = Period.between(fechaNac,LocalDate.now()).getYears();
+        gestor.registroUsuario(nombre,apellido1,apellido2,nombreUsuario,correo,contrasenna,imagen,edadUser,pais,identificacion);
     }
 
     private void crearAdmin() {

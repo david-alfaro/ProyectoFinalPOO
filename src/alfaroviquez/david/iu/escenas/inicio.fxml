@@ -2,29 +2,48 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfaroviquez.david.iu.controllers.InicioController">
+<AnchorPane opacity="0.85" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfaroviquez.david.iu.controllers.InicioController">
    <children>
       <Label layoutX="246.0" layoutY="92.0" text="Identificación" textFill="WHITE">
          <font>
             <Font name="Yu Gothic Medium" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="166.0" layoutY="122.0" prefHeight="25.0" prefWidth="271.0" />
+      <TextField fx:id="txtIdentifiacion" layoutX="166.0" layoutY="122.0" prefHeight="25.0" prefWidth="271.0" />
       <Label layoutX="254.0" layoutY="167.0" text="Contraseña" textFill="WHITE">
          <font>
             <Font name="Yu Gothic Medium" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="166.0" layoutY="200.0" prefHeight="25.0" prefWidth="271.0" />
-      <Button layoutX="166.0" layoutY="253.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="271.0" style="-fx-background-color: #16697a;" text="Iniciar Sesión" textFill="WHITE">
+      <Button layoutX="166.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleInisioSesion" prefHeight="25.0" prefWidth="271.0" style="-fx-background-color: #03506f;" text="Iniciar Sesión" textFill="WHITE">
          <font>
             <Font name="Yu Gothic Medium" size="18.0" />
          </font>
       </Button>
+      <Button layoutX="167.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleRegistro" prefHeight="25.0" prefWidth="271.0" style="-fx-background-color: #03506f;" text="Registrarse" textFill="WHITE">
+         <font>
+            <Font name="Yu Gothic Medium" size="18.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutY="-2.0" prefHeight="55.0" prefWidth="600.0" style="-fx-background-color: #03506f;">
+         <children>
+            <Label layoutX="22.0" layoutY="10.0" text="MUSICAPP" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic Medium" size="29.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblAlerta" layoutX="117.0" layoutY="64.0" prefHeight="17.0" prefWidth="371.0" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtContrasenna" layoutX="165.0" layoutY="200.0" prefHeight="25.0" prefWidth="271.0" />
    </children>
 </AnchorPane>
