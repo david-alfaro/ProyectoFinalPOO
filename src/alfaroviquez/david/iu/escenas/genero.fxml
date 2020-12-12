@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfaroviquez.david.iu.controllers.GeneroController">
+   <left>
+      <VBox opacity="0.8" prefHeight="500.0" prefWidth="317.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Generos" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic Medium" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Nombre" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="txtNombreGenero">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Label layoutX="20.0" layoutY="60.0" text="Descripcion" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <TextArea fx:id="txtDescripcion" prefHeight="115.0" prefWidth="233.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </TextArea>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleGuardarGenero" style="-fx-background-color: #03506f;" text="Guardar" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="30.0" right="2.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handleActualizarGenero" style="-fx-background-color: #03506f;" text="Actualizar" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="3.0" right="3.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handleEliminarGenero" style="-fx-background-color: #03506f;" text="Eliminar" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="3.0" right="3.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handleLimpiarCampos" style="-fx-background-color: #03506f;" text="Limpiar" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="3.0" right="3.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="lblAlerta" prefHeight="17.0" prefWidth="271.0" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <TableView fx:id="tblGenero" onMouseClicked="#handleMouseAction" prefHeight="500.0" prefWidth="498.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="colNombreGenero" prefWidth="193.0" text="Genero" />
+          <TableColumn fx:id="colDescripcionGenero" prefWidth="289.0" text="Descripcion" />
+        </columns>
+      </TableView>
+   </right>
+</BorderPane>

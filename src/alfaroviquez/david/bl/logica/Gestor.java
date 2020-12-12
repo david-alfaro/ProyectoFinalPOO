@@ -5,6 +5,7 @@ import alfaroviquez.david.persistencia.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,11 +79,17 @@ public class Gestor {
         return this.repositorioCompositoresDB.encontrarCompositores();
     }
 
-    public void registroArtistas(String nombre, String apellido1, String nombreArtistico, String paisNacimiento, int edad, String descripcion, LocalDate fechaNacimiento, LocalDate fechaDefuncion) {
+    public void registroArtistas(String nombre, String apellido1, String nombreArtistico, String paisNacimiento, int edad, String descripcion, LocalDate fechaNacimiento, LocalDate fechaDefuncion)  {
         Artista nuevoArtista = new Artista(nombre, apellido1, nombreArtistico, paisNacimiento, edad, descripcion, fechaNacimiento, fechaDefuncion);
-        repositorioArtistasDB.registrarArtista(nuevoArtista);
+        try {
+            repositorioArtistasDB.registrarArtista(nuevoArtista);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
+
+
 
     public List<Artista> listarArtistas() {
         return this.repositorioArtistasDB.encontrarArtista();
@@ -103,8 +110,8 @@ public class Gestor {
     //return this.compositores;
     //}
 
-    public void guardarCancion(String nombre, String mp3, LocalDate fechaLanzamiento) {
-        Cancion nuevaCancion = new Cancion(nombre,mp3,fechaLanzamiento);
+    public void guardarCancion(String nombre, Artista artista, Genero genero, Compositor compositor, Album album, String mp3, LocalDate fechaLanzamiento) {
+        Cancion nuevaCancion = new Cancion(nombre,artista,genero,compositor,album,mp3,fechaLanzamiento);
         nuevaCancion.setId(repositiorCancionesBD.registrarCancion(nuevaCancion));
         System.out.println(nuevaCancion.getId());
     }

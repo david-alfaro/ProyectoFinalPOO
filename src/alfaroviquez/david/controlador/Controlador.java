@@ -34,13 +34,13 @@ public class Controlador {
                 listarUsuarios();
                 break;
             case 4:
-                registrarArtista();
+                //registrarArtista();
                 break;
             case 5:
                 listarArtistas();
                 break;
             case 6:
-                registrarGenero();
+                //registrarGenero();
                 break;
             case 7:
                 listarGeneros();
@@ -138,7 +138,8 @@ public class Controlador {
         }
     }
 
-    private void registrarArtista() {
+    public void registrarArtista(String nombre, String apellido1, String nombreArtistico, String paisNacimiento,  String descripcion, LocalDate fechaNacimiento, LocalDate fechaDefuncion) {
+        /*
         interfaz.imprimirMensaje("Nombre: ");
         String nombre = interfaz.leerTexto();
         interfaz.imprimirMensaje("Primer apellido: ");
@@ -166,9 +167,10 @@ public class Controlador {
         }else{
 
         }
-
-        gestor.registroArtistas(nombre,apellido1,nombreArtistico,pais,edad,descripcion,fechaNac,fechaDef);
-        interfaz.imprimirMensaje("Artista registrado");
+*/
+        int edad = Period.between(fechaNacimiento,LocalDate.now()).getYears();
+        gestor.registroArtistas(nombre,apellido1,nombreArtistico,paisNacimiento,edad,descripcion,fechaNacimiento,fechaDefuncion);
+        //interfaz.imprimirMensaje("Artista registrado");
 
     }
 
@@ -179,13 +181,15 @@ public class Controlador {
         }
     }
 
-    private void registrarGenero() {
-        interfaz.imprimirMensaje("Nombre: ");
+
+
+    public void registrarGenero(String nombre, String descripcion) {
+        /*interfaz.imprimirMensaje("Nombre: ");
         String nombre = interfaz.leerTexto();
         interfaz.imprimirMensaje("Descripción: ");
-        String descripcion = interfaz.leerTexto();
+        String descripcion = interfaz.leerTexto();*/
         gestor.guardarGenero(nombre,descripcion);
-        interfaz.imprimirMensaje("Genero musical resitrado con exito");
+        //interfaz.imprimirMensaje("Genero musical resitrado con exito");
     }
 
     private void listarGeneros() {
@@ -219,6 +223,7 @@ public class Controlador {
     }
 
     private void registrarCancion() {
+        /*
         interfaz.imprimirMensaje("Nombre de la canción: ");
         String nombreCancion = interfaz.leerTexto();
         interfaz.imprimirMensaje("Fecha lanzamiento: ");
@@ -227,8 +232,8 @@ public class Controlador {
         //en estos momentos se esta probando con un string como link de la cancion
         String mp3 = interfaz.leerTexto();
         LocalDate fechaLanzamiento = obtenerFecha(fecha);
-        gestor.guardarCancion(nombreCancion,mp3,fechaLanzamiento);
-        interfaz.imprimirMensaje("Cancion creada!");
+        gestor.guardarCancion(nombre,artista,genero,compositor,album,mp3,fechaLanzamiento);
+        interfaz.imprimirMensaje("Cancion creada!");*/
 
 
     }

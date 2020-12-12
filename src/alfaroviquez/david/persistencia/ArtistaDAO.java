@@ -2,10 +2,7 @@ package alfaroviquez.david.persistencia;
 
 import alfaroviquez.david.bl.entidades.Artista;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -15,13 +12,36 @@ import java.util.List;
 public class ArtistaDAO {
 
     Connection con;
+    private final String Template_Insertar = "insert into artista (nombreArtista,apellido1,nombreArtistico,pais,fechaNacimiento,fechaDefuncion,edad,descripcion)" +
+            "values (?,?,?,?,?,?,?,?)";
+
+    private PreparedStatement cmdInsertar;
 
     public ArtistaDAO(Connection con){
+
         this.con = con;
+        try{
+            this.cmdInsertar = con.prepareStatement(Template_Insertar);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
-    public void registrarArtista(Artista artista){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public void registrarArtista(Artista artista) throws SQLException {
+        //DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if(this.cmdInsertar!=null){
+            this.cmdInsertar.setString(1,artista.getNombre());
+            this.cmdInsertar.setString(2,artista.getApellido1());
+            this.cmdInsertar.setString(3,artista.getNombreArtistico());
+            this.cmdInsertar.setString(4,artista.getPaisNacimiento());
+            this.cmdInsertar.setDate(5, Date.valueOf(artista.getFechaNacimiento()));
+            this.cmdInsertar.setString(6,artista.getFechaDefuncion()==null ? null:"'"+artista.getFechaDefuncion()+"'");
+            this.cmdInsertar.setInt(7,artista.getEdad());
+            this.cmdInsertar.setString(8,artista.getDescripcion());
+            this.cmdInsertar.execute();
+
+        }
+        /*
         try{
             Statement statement = con.createStatement();
             StringBuilder sentence = new StringBuilder("insert into artista (nombreArtista,apellido1,nombreArtistico,pais,fechaNacimiento,fechaDefuncion,edad,descripcion)");
@@ -45,10 +65,12 @@ public class ArtistaDAO {
             statement.execute(sentence.toString());
         }catch (SQLException e){
             e.printStackTrace();
-        }
+        }*/
 
 
     }
+
+
 
     public List<Artista>encontrarArtista(){
         ArrayList<Artista> resultadosBD = new ArrayList<>();

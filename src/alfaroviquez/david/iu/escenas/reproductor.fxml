@@ -13,7 +13,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfaroviquez.david.iu.controllers.ReproductoController">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -105,7 +105,7 @@
                   </HBox>
                </children>
             </VBox>
-            <ImageView fitHeight="500.0" fitWidth="450.0" opacity="0.82" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+            <ImageView fx:id="imageviewReproductor" fitHeight="500.0" fitWidth="450.0" opacity="0.82" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                <image>
                   <Image url="@../../../../../../../OneDrive/SOFTEC/POO/Proyecto/Imagenes/imagenReproductor.jpg" />
                </image>
@@ -127,7 +127,7 @@
                   <Insets bottom="20.0" left="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label text="Canciones" textFill="WHITE">
+            <Label onMouseClicked="#handleCanciones" text="Canciones" textFill="WHITE">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
                </font>
@@ -135,7 +135,7 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label text="Artistas" textFill="WHITE">
+            <Label onMouseClicked="#handleArtistas" text="Artistas" textFill="WHITE">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
                </font>
@@ -159,7 +159,7 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label text="Generos" textFill="WHITE">
+            <Label onMouseClicked="#handleGenero" text="Generos" textFill="WHITE">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
                </font>

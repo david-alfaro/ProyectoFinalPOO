@@ -12,19 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfaroviquez.david.iu.controllers.ArtistaController">
    <right>
-      <TableView opacity="0.88" prefHeight="450.0" prefWidth="759.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <TableView fx:id="tblArtistas" onMouseClicked="#handleMouseAction" opacity="0.88" prefHeight="500.0" prefWidth="811.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="Nombre" />
-          <TableColumn prefWidth="75.0" text="Apellido" />
-            <TableColumn prefWidth="107.0" text="Nombre Artístico" />
-            <TableColumn prefWidth="105.0" text="Pais Nacimiento" />
-            <TableColumn prefWidth="47.0" text="Edad" />
-            <TableColumn prefWidth="96.0" text="Fecha Nac" />
-            <TableColumn prefWidth="87.0" text="Fecha Def" />
-            <TableColumn prefWidth="165.0" text="Descripción" />
+          <TableColumn fx:id="colNombre" prefWidth="105.0" text="Nombre" />
+          <TableColumn fx:id="colApellido" prefWidth="135.0" text="Apellido" />
+            <TableColumn fx:id="colNombreArtistico" prefWidth="136.0" text="Nombre Artístico" />
+            <TableColumn fx:id="colPais" prefWidth="153.0" text="Pais Nacimiento" />
+            <TableColumn fx:id="colEdad" prefWidth="82.0" text="Edad" />
+            <TableColumn fx:id="colDescripcion" prefWidth="196.0" text="Descripción" />
         </columns>
       </TableView>
    </right>
@@ -44,7 +41,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <TextField>
+            <TextField fx:id="txtNombreArtista">
                <padding>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -57,7 +54,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <TextField layoutX="10.0" layoutY="79.0">
+            <TextField fx:id="txtApellido" layoutX="10.0" layoutY="79.0">
                <padding>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -70,7 +67,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <TextField layoutX="10.0" layoutY="121.0">
+            <TextField fx:id="txtNombreArtistico" layoutX="10.0" layoutY="121.0">
                <padding>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -83,7 +80,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <TextField layoutX="10.0" layoutY="163.0">
+            <TextField fx:id="txtPais" layoutX="10.0" layoutY="163.0">
                <padding>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -96,7 +93,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <DatePicker prefHeight="25.0" prefWidth="330.0">
+            <DatePicker fx:id="dateNac" prefHeight="25.0" prefWidth="330.0">
                <padding>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -109,7 +106,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <DatePicker prefHeight="25.0" prefWidth="301.0">
+            <DatePicker fx:id="dateDef" prefHeight="25.0" prefWidth="301.0">
                <padding>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -122,7 +119,7 @@
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <TextField layoutX="10.0" layoutY="289.0">
+            <TextField fx:id="txtDescripcion" layoutX="10.0" layoutY="289.0">
                <padding>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </padding>
@@ -130,25 +127,33 @@
                   <Insets left="5.0" right="5.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="55.0" prefWidth="292.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="Guardar" textFill="WHITE">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleGuardar" style="-fx-background-color: #03506f;" text="Guardar" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="25.0" right="10.0" top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="Editar" textFill="WHITE">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleEditar" style="-fx-background-color: #03506f;" text="Actualizar" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="25.0" right="10.0" top="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="Eliminar" textFill="WHITE">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handelEmilinar" style="-fx-background-color: #03506f;" text="Eliminar" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="25.0" right="10.0" top="20.0" />
                      </HBox.margin>
                   </Button>
                </children>
             </HBox>
+            <Button mnemonicParsing="false" onAction="#handleLimpiarCampos" style="-fx-background-color: #03506f;" text="Limpiar Campos" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Yu Gothic Medium" size="12.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </left>
