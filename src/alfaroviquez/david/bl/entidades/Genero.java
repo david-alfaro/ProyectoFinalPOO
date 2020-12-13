@@ -8,8 +8,17 @@ package alfaroviquez.david.bl.entidades;
  * @since 28/11/2020
  */
 public class Genero {
+    private int id;
     private String nombre;
     private String descripcion;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;

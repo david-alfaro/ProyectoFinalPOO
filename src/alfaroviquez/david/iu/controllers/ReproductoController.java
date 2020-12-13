@@ -71,4 +71,20 @@ public class ReproductoController implements Initializable {
             e.getCause();
         }
     }
+
+    public void handleCompositores(MouseEvent mouseEvent) {
+        try{
+            Stage generoStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../escenas/compositor.fxml"));
+            generoStage.setScene(new Scene(root));
+            generoStage.setTitle("MUSICAPP | Registro de compositores");
+            generoStage.setResizable(false);
+            generoStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
 }

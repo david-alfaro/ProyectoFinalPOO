@@ -9,9 +9,9 @@ package alfaroviquez.david.bl.entidades;
 public class Compositor {
     private String nombre;
     private String apellido1;
-    private String apellido2;
     private  int edad;
     private String paisNacimiento;
+    private Genero genero;
 
     public String getNombre() {
         return nombre;
@@ -29,13 +29,6 @@ public class Compositor {
         this.apellido1 = apellido1;
     }
 
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
-    }
 
     public int getEdad() {
         return edad;
@@ -52,6 +45,15 @@ public class Compositor {
     public void setPaisNacimiento(String paisNacimiento) {
         this.paisNacimiento = paisNacimiento;
     }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
     public Compositor(){}
 
     /***
@@ -59,16 +61,16 @@ public class Compositor {
      *
      * @param nombre este parametro defien el nombre del compositor
      * @param apellido1 este parametro define el primer apellido del compositor
-     * @param apellido2 este parametro define el segundo apellido del compositor
      * @param edad este parametro define la edad del compositor
      * @param paisNacimiento este parametro define el pais de nacimiento del compositor
+     * @param genero este parametro se refiere al genero que compone el compositor
      */
-    public Compositor(String nombre, String apellido1, String apellido2, int edad, String paisNacimiento) {
+    public Compositor(String nombre, String apellido1, int edad, String paisNacimiento, Genero genero) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
         this.edad = edad;
         this.paisNacimiento = paisNacimiento;
+        this.genero=genero;
     }
 
     @Override
@@ -76,13 +78,12 @@ public class Compositor {
         return "Compositor{" +
                 "nombre='" + nombre + '\'' +
                 ", apellido1='" + apellido1 + '\'' +
-                ", apellido2='" + apellido2 + '\'' +
                 ", edad=" + edad +
                 ", paisNacimiento='" + paisNacimiento + '\'' +
                 '}';
     }
 
     public String toCSVLine(){
-        return this.nombre+","+this.apellido1+","+this.apellido2+","+this.edad+","+this.paisNacimiento;
+        return this.nombre+","+this.apellido1+","+this.edad+","+this.paisNacimiento;
     }
 }

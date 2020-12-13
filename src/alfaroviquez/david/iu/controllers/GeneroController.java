@@ -73,7 +73,7 @@ public class GeneroController implements Initializable {
 
     }
 
-    private ObservableList<Genero> getGeneros() {
+    public ObservableList<Genero> getGeneros() {
         ObservableList<Genero> listaGeneros = FXCollections.observableArrayList();
         DataBaseConnection connection = new DataBaseConnection();
         Connection connecBD = connection.getConnection();

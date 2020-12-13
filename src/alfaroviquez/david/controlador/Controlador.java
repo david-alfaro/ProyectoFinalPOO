@@ -46,7 +46,7 @@ public class Controlador {
                 listarGeneros();
                 break;
             case 8:
-                registrarCompositor();
+                //registrarCompositor();
                 break;
             case 9:
                 listarCompositores();
@@ -199,7 +199,8 @@ public class Controlador {
         }
     }
 
-    private void registrarCompositor() {
+    public void registrarCompositor(String nombre, String apellido1,  int edad, String paisNacimiento, String generocbx) {
+        /*
         interfaz.imprimirMensaje("Nombre: ");
         String nombre = interfaz.leerTexto();
         interfaz.imprimirMensaje("Primer apellido: ");
@@ -212,6 +213,10 @@ public class Controlador {
         String pais = interfaz.leerTexto();
         gestor.registroCompositor(nombre,apellido1,apellido2,edad,pais);
         interfaz.imprimirMensaje("Compositor registrado");
+
+         */
+        Genero genero = gestor.encontrarGenero(generocbx);
+        gestor.registroCompositor(nombre,apellido1,edad,paisNacimiento,genero);
     }
 
     private void listarCompositores() {

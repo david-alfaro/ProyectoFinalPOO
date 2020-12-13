@@ -151,7 +151,7 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label text="Compositores" textFill="WHITE">
+            <Label onMouseClicked="#handleCompositores" text="Compositores" textFill="WHITE">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
                </font>

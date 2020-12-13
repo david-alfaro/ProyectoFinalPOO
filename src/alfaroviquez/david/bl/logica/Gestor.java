@@ -69,9 +69,13 @@ public class Gestor {
         return this.repositorioUsuariosDB.listarUsuarios();
     }
 
-    public void registroCompositor(String nombre, String apellido1, String apellido2, int edad, String paisNacimiento) {
-        Compositor nuevoCompositor = new Compositor(nombre, apellido1, apellido2, edad, paisNacimiento);
-        repositorioCompositoresDB.registrarCompositor(nuevoCompositor);
+    public void registroCompositor(String nombre, String apellido1,  int edad, String paisNacimiento, Genero genero) {
+        Compositor nuevoCompositor = new Compositor(nombre, apellido1, edad, paisNacimiento, genero);
+        try {
+            repositorioCompositoresDB.registrarCompositor(nuevoCompositor);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -98,7 +102,11 @@ public class Gestor {
 
     public void guardarGenero(String nombre, String descripcion) {
         Genero nuevoGenero = new Genero(nombre, descripcion);
-        repositorioGeneroBD.registrarGenero(nuevoGenero);
+        try {
+            nuevoGenero.setId(repositorioGeneroBD.registrarGenero(nuevoGenero));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Genero> listaGeneros() {
@@ -135,8 +143,9 @@ public class Gestor {
 
 
     public Genero encontrarGenero(String nombre) {
-        for (int i = 0; i < generos.size(); i++) {
-            Genero temp = generos.get(i);
+        List<Genero>listaGeneros = listaGeneros();
+        for (int i = 0; i < listaGeneros.size(); i++) {
+            Genero temp = listaGeneros.get(i);
             if (temp.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
                 return temp;
             }
