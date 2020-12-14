@@ -17,17 +17,17 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <MediaView fitHeight="200.0" fitWidth="200.0" />
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
             <VBox alignment="BOTTOM_CENTER" opacity="0.9" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" StackPane.alignment="BOTTOM_CENTER">
                <children>
-                  <Slider>
+                  <Slider fx:id="progressBar">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Slider>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #03506f;" text="Subir canción..." textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#subirCancion" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #03506f;" text="Subir canción" textFill="WHITE">
                            <opaqueInsets>
                               <Insets right="15.0" />
                            </opaqueInsets>
@@ -38,7 +38,7 @@
                               <Font name="Yu Gothic Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="Play" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handlePlay" style="-fx-background-color: #03506f;" text="Play" textFill="WHITE">
                            <opaqueInsets>
                               <Insets right="15.0" />
                            </opaqueInsets>
@@ -49,7 +49,7 @@
                               <Font name="Yu Gothic Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="Pausa" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handelPausa" style="-fx-background-color: #03506f;" text="Pausa" textFill="WHITE">
                            <opaqueInsets>
                               <Insets right="15.0" />
                            </opaqueInsets>
@@ -60,7 +60,7 @@
                               <Font name="Yu Gothic Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="Stop" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleStop" style="-fx-background-color: #03506f;" text="Stop" textFill="WHITE">
                            <opaqueInsets>
                               <Insets right="15.0" />
                            </opaqueInsets>
@@ -71,7 +71,7 @@
                               <Font name="Yu Gothic Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="-10s" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handle10sminus" style="-fx-background-color: #03506f;" text="-10s" textFill="WHITE">
                            <opaqueInsets>
                               <Insets right="15.0" />
                            </opaqueInsets>
@@ -82,7 +82,7 @@
                               <Font name="Yu Gothic Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" style="-fx-background-color: #03506f;" text="+10s" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handle10splus" style="-fx-background-color: #03506f;" text="+10s" textFill="WHITE">
                            <opaqueInsets>
                               <Insets right="15.0" />
                            </opaqueInsets>
@@ -93,7 +93,7 @@
                               <Font name="Yu Gothic Medium" size="12.0" />
                            </font>
                         </Button>
-                        <Slider>
+                        <Slider fx:id="volumeBar">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
