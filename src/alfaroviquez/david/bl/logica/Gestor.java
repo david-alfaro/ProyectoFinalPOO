@@ -25,6 +25,7 @@ public class Gestor {
     private final String PWD = "12345";
     private Connection connection;
 
+    private AdministrativoDAO repoAdminDAO;
     private UsuarioFinalDAO repositorioUsuariosDB;
     private CompositorDAO repositorioCompositoresDB;
     private ArtistaDAO repositorioArtistasDB;
@@ -47,6 +48,7 @@ public class Gestor {
         try {
             Class.forName(DRIVER);
             this.connection = DriverManager.getConnection(DB_URL, USER, PWD);
+            this.repoAdminDAO = new AdministrativoDAO(this.connection);
             this.repositorioUsuariosDB = new UsuarioFinalDAO(this.connection);
             this.repositorioCompositoresDB = new CompositorDAO(this.connection);
             this.repositorioArtistasDB = new ArtistaDAO(this.connection);
@@ -59,6 +61,16 @@ public class Gestor {
             e.printStackTrace();
         }
     }
+
+    public void registrarAdmin(String nombre, String nombreUsuario, String apellido1, String apellido2, String correo, String contrasenna, String imagen){
+        Administrador nuevoAdmin = new Administrador( nombre, nombreUsuario,apellido1,  apellido2, correo, contrasenna, imagen);
+        try {
+            repoAdminDAO.guardarAdmin(nuevoAdmin);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void registroUsuario(String nombre, String apellido1, String apellido2, String nombreUsuario, String correo, String contrasenna, String imagen, int edad, String pais, String identificacion) {
         UsuarioFinal nuevoUsuario = new UsuarioFinal(nombre, apellido1, apellido2, nombreUsuario, correo, contrasenna, imagen, edad, pais, identificacion);
@@ -76,7 +88,7 @@ public class Gestor {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println(nuevoCompositor.getGenero().getId());
     }
 
     public List<Compositor> listarCompositores() {
@@ -107,6 +119,7 @@ public class Gestor {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println(nuevoGenero.getId());
     }
 
     public List<Genero> listaGeneros() {
@@ -147,6 +160,17 @@ public class Gestor {
         for (int i = 0; i < listaGeneros.size(); i++) {
             Genero temp = listaGeneros.get(i);
             if (temp.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+                return temp;
+            }
+        }
+        return null;
+    }
+
+    public Genero encontrarGeneroPorId(int id){
+        List<Genero>listaGeneros = listaGeneros();
+        for (int i = 0; i < listaGeneros.size(); i++) {
+            Genero temp = listaGeneros.get(i);
+            if (temp.getId()==id) {
                 return temp;
             }
         }
@@ -202,9 +226,13 @@ public class Gestor {
         return null;
     }
 
-    public void guardarAlbum(String nombre, LocalDate fechalanzamiento, String imagen) {
-        Album nuevoAlbum = new Album(nombre,fechalanzamiento,imagen,new ArrayList<>());
-        nuevoAlbum.setId(repositorioAlbumBD.registrarAlbum(nuevoAlbum));
+    public void guardarAlbum(String nombre, LocalDate fechalanzamiento, String imagen, String mp3) {
+        Album nuevoAlbum = new Album(nombre,fechalanzamiento,imagen,mp3);
+        try {
+            nuevoAlbum.setId(repositorioAlbumBD.registrarAlbum(nuevoAlbum));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

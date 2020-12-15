@@ -14,7 +14,7 @@ public class Album {
     private String nombre;
     private LocalDate fechalanzamiento;
     private String imagen;
-    private ArrayList<Cancion> canciones;
+    private String canciones;
 
     public int getId() {
         return id;
@@ -24,11 +24,11 @@ public class Album {
         this.id = id;
     }
 
-    public ArrayList<Cancion> getCanciones() {
+    public String getCanciones() {
         return canciones;
     }
 
-    public void setCanciones(ArrayList<Cancion> canciones) {
+    public void setCanciones(String canciones) {
         this.canciones = canciones;
     }
 
@@ -64,7 +64,7 @@ public class Album {
      * @param imagen del album
      * @param canciones este parametro se refiere a la lista de canciones que pertenecen al album
      */
-    public Album(String nombre, LocalDate fechalanzamiento, String imagen, ArrayList<Cancion> canciones) {
+    public Album(String nombre, LocalDate fechalanzamiento, String imagen, String canciones) {
         this.nombre = nombre;
         this.fechalanzamiento = fechalanzamiento;
         this.imagen = imagen;

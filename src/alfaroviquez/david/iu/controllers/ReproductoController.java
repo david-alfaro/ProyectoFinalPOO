@@ -95,6 +95,20 @@ public class ReproductoController implements Initializable {
             e.getCause();
         }
     }
+    public void handleAlbums(MouseEvent mouseEvent) {
+        try{
+            Stage generoStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../escenas/album.fxml"));
+            generoStage.setScene(new Scene(root));
+            generoStage.setTitle("MUSICAPP | Registro de album");
+            generoStage.setResizable(false);
+            generoStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
 
     public void handleCompositores(MouseEvent mouseEvent) {
         try{
@@ -178,4 +192,6 @@ public class ReproductoController implements Initializable {
     public void handle10splus(ActionEvent actionEvent) {
         mediaPlayer.seek(mediaPlayer.getCurrentTime().add(Duration.seconds(10)));
     }
+
+
 }

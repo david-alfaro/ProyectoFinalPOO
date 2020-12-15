@@ -123,7 +123,7 @@
                   <Insets left="10.0" />
                </VBox.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#subirCancion" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: #03506f;" text="Buscar canción" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#subirCancion" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: #03506f;" text="Subir canción" textFill="WHITE">
                <VBox.margin>
                   <Insets left="10.0" top="10.0" />
                </VBox.margin>

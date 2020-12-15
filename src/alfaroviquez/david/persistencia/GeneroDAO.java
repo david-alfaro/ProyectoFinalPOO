@@ -22,7 +22,7 @@ public class GeneroDAO {
     }
 
     public int registrarGenero(Genero genero) throws SQLException {
-        int indiceGenero = -1;
+        int indiceGenero = 0;
         if(this.cmdInsertar!=null){
             this.cmdInsertar.setString(1,genero.getNombre());
             this.cmdInsertar.setString(2,genero.getDescripcion());
@@ -58,6 +58,7 @@ public class GeneroDAO {
             ResultSet results = statement.executeQuery("Select * from genero");
             while (results.next()) {
                 Genero unGenero = new Genero();
+                unGenero.setId(results.getInt("idGenero"));
                 unGenero.setNombre(results.getString("nombreGenero"));
                 unGenero.setDescripcion(results.getString("descripcion"));
                 listadeGenerosBD.add(unGenero);

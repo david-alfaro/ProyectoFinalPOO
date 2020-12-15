@@ -3,6 +3,7 @@ package alfaroviquez.david.iu.controllers;
 
 import alfaroviquez.david.bl.entidades.Compositor;
 import alfaroviquez.david.bl.entidades.Genero;
+import alfaroviquez.david.bl.logica.Gestor;
 import alfaroviquez.david.controlador.Controlador;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +26,7 @@ import java.util.ResourceBundle;
 
 
 public class CompositorController implements Initializable {
+    Gestor gestor = new Gestor();
     Controlador controlador = new Controlador();
     @FXML
     private TextField txtNombreCompositor;
@@ -54,6 +56,8 @@ public class CompositorController implements Initializable {
 
     @FXML
     private TableColumn<Compositor, String> colPais;
+    @FXML
+    private TableColumn<Compositor, String> colGenero;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -107,7 +111,7 @@ public class CompositorController implements Initializable {
         ObservableList<Compositor> listaCompositores = FXCollections.observableArrayList();
         DataBaseConnection con = new DataBaseConnection();
         Connection connectionBD = con.getConnection();
-        String query = "select * from compositor";
+        String query = "select * from compositor ";
         try {
             Statement statement = connectionBD.createStatement();
             ResultSet rs = statement.executeQuery(query);
@@ -117,6 +121,7 @@ public class CompositorController implements Initializable {
                 nuevoCompositor.setApellido1(rs.getString("apellido1"));
                 nuevoCompositor.setEdad(rs.getInt("edad"));
                 nuevoCompositor.setPaisNacimiento(rs.getString("paisNacimiento"));
+                //nuevoCompositor.setGenero(gestor.encontrarGeneroPorId(rs.getInt("idGenero")));
                 listaCompositores.add(nuevoCompositor);
             }
         } catch (SQLException e) {
@@ -131,6 +136,7 @@ public class CompositorController implements Initializable {
         colApellido.setCellValueFactory(new PropertyValueFactory<Compositor,String>("apellido1"));
         colEdad.setCellValueFactory(new PropertyValueFactory<Compositor,Integer>("edad"));
         colPais.setCellValueFactory(new PropertyValueFactory<Compositor,String>("paisNacimiento"));
+        colGenero.setCellValueFactory(new PropertyValueFactory<Compositor,String>("genero"));
         tblCompositor.setItems(lista);
 
     }
@@ -152,5 +158,6 @@ public class CompositorController implements Initializable {
         txtApellido.setText(unCompositor.getApellido1());
         txtEdad.setText(String.valueOf(unCompositor.getEdad()));
         txtPais.setText(unCompositor.getPaisNacimiento());
+
     }
 }

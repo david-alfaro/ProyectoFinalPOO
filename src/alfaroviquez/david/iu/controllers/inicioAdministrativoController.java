@@ -1,6 +1,5 @@
 package alfaroviquez.david.iu.controllers;
 
-import alfaroviquez.david.bl.logica.Gestor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class InicioController {
-
+public class inicioAdministrativoController {
     @FXML
     private TextField txtIdentifiacion;
 
@@ -25,7 +24,6 @@ public class InicioController {
 
     @FXML
     private PasswordField txtContrasenna;
-
 
     public void handleInisioSesion(ActionEvent actionEvent) {
         if(txtContrasenna.getText().isBlank()==false && txtIdentifiacion.getText().isBlank()==false){
@@ -39,7 +37,7 @@ public class InicioController {
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
         Connection connectBD = dataBaseConnection.getConnection();
 
-        String verificacion = "select count(1) from usuario where identificacion = '"+txtIdentifiacion.getText()+"' and contrasenna='"+txtContrasenna.getText()+"'";
+        String verificacion = "select count(1) from administrador where apellido1 = '"+txtIdentifiacion.getText()+"' and contransenna='"+txtContrasenna.getText()+"'";
         try{
             Statement statement = connectBD.createStatement();
             ResultSet resultSet = statement.executeQuery(verificacion);
@@ -63,51 +61,6 @@ public class InicioController {
             reproductorStage.setTitle("MUSICAPP | Reproductor");
             reproductorStage.setResizable(false);
             reproductorStage.show();
-
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-
-    public void handleRegistro(ActionEvent actionEvent) {
-        try{
-            Stage registerStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../escenas/register.fxml"));
-            registerStage.setScene(new Scene(root));
-            registerStage.setTitle("MUSICAPP | Registro");
-            registerStage.setResizable(false);
-            registerStage.show();
-
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-
-    public void handleLoginAdmin(MouseEvent mouseEvent) {
-        try{
-            Stage registerStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../escenas/inicioAdministrativo.fxml"));
-            registerStage.setScene(new Scene(root));
-            registerStage.setTitle("MUSICAPP | Registro");
-            registerStage.setResizable(false);
-            registerStage.show();
-
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-
-    public void handleRegistroAdministrativo(ActionEvent actionEvent) {
-        try{
-            Stage registerStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("../escenas/registroAdmin.fxml"));
-            registerStage.setScene(new Scene(root));
-            registerStage.setTitle("MUSICAPP | Registro");
-            registerStage.setResizable(false);
-            registerStage.show();
 
         }catch (Exception e){
             e.printStackTrace();

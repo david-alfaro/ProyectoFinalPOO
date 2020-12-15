@@ -16,10 +16,11 @@
    <right>
       <TableView fx:id="tblCompositor" onMouseClicked="#handleMouseAction" opacity="0.82" prefHeight="500.0" prefWidth="707.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="colNombreCompositor" prefWidth="207.0" text="Nombre" />
-          <TableColumn fx:id="colApellido" prefWidth="183.0" text="Primer Apellido" />
-            <TableColumn fx:id="colEdad" prefWidth="88.0" text="Edad" />
-            <TableColumn fx:id="colPais" prefWidth="208.0" text="Pais Nacimiento" />
+          <TableColumn fx:id="colNombreCompositor" prefWidth="146.0" text="Nombre" />
+          <TableColumn fx:id="colApellido" prefWidth="141.0" text="Primer Apellido" />
+            <TableColumn fx:id="colEdad" text="Edad" />
+            <TableColumn fx:id="colPais" prefWidth="177.0" text="Pais Nacimiento" />
+            <TableColumn fx:id="colGenero" prefWidth="142.0" text="Genero" />
         </columns>
       </TableView>
    </right>

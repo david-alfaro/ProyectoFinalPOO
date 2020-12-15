@@ -1,5 +1,7 @@
 package alfaroviquez.david.bl.entidades;
 
+import java.util.Objects;
+
 /***
  * Esta clase define un objeto de tipo Genero
  *
@@ -51,6 +53,7 @@ public class Genero {
     @Override
     public String toString() {
         return "Genero{" +
+                "id='" + id + '\'' +
                 "nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
@@ -58,5 +61,20 @@ public class Genero {
 
     public String toCSVLine(){
         return this.nombre+","+this.descripcion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Genero genero = (Genero) o;
+        return id == genero.id &&
+                Objects.equals(nombre, genero.nombre) &&
+                Objects.equals(descripcion, genero.descripcion);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, descripcion);
     }
 }

@@ -25,7 +25,7 @@ public class Controlador {
     private void procesarOpcion(int opcion) {
         switch (opcion) {
             case 1:
-                crearAdmin();
+                //crearAdmin();
                 break;
             case 2:
                 //registrarUsuario();
@@ -64,7 +64,7 @@ public class Controlador {
                 listarListaReproduccion();
                 break;
             case 14:
-                crearAlbum();
+                //crearAlbum();
                 break;
             case 15:
                 listarAlbums();
@@ -111,8 +111,8 @@ public class Controlador {
         gestor.registroUsuario(nombre,apellido1,apellido2,nombreUsuario,correo,contrasenna,imagen,edadUser,pais,identificacion);
     }
 
-    private void crearAdmin() {
-        interfaz.imprimirMensaje("Nombre: ");
+    public void crearAdmin(String nombre, String nombreUsuario , String apellido1, String apellido2, String correo, String contrasenna, String imagen) {
+        /*interfaz.imprimirMensaje("Nombre: ");
         String nombre = interfaz.leerTexto();
         interfaz.imprimirMensaje("Primer apellido: ");
         String apellido1 = interfaz.leerTexto();
@@ -125,8 +125,8 @@ public class Controlador {
         interfaz.imprimirMensaje("Contraseña: ");
         String contrasenna = interfaz.leerTexto();
         interfaz.imprimirMensaje("Imagen de perfil o ávatar: ");
-        String imagen = interfaz.leerTexto();
-        Administrador admin = new Administrador(nombre, apellido1, apellido2, nombreUsuario, correo, contrasenna, imagen);
+        String imagen = interfaz.leerTexto();*/
+        gestor.registrarAdmin(nombre,nombreUsuario,apellido1,apellido2,correo,contrasenna,imagen);
 
     }
 
@@ -216,6 +216,8 @@ public class Controlador {
 
          */
         Genero genero = gestor.encontrarGenero(generocbx);
+        System.out.println(genero.getId());
+        System.out.println(genero.toString());
         gestor.registroCompositor(nombre,apellido1,edad,paisNacimiento,genero);
     }
 
@@ -286,7 +288,8 @@ public class Controlador {
         }
     }
 
-    public void crearAlbum() {
+    public void crearAlbum(String nombre, LocalDate fechalanzamiento, String imagen, String mp3) {
+        /*
         interfaz.imprimirMensaje("Nombre del album: ");
         String nombreAlbum = interfaz.leerTexto();
         interfaz.imprimirMensaje("Fecha de lanzamiento: ");
@@ -294,9 +297,9 @@ public class Controlador {
         LocalDate fechaLanzamiento = obtenerFecha(fecha);
         interfaz.imprimirMensaje("Imagen del album: ");
         //De momento la imagen se maneja escribiendo un String
-        String imagenAlbum = interfaz.leerTexto();
-        gestor.guardarAlbum(nombreAlbum,fechaLanzamiento,imagenAlbum);
-        interfaz.imprimirMensaje("Nuevo Album ha sido creado");
+        String imagenAlbum = interfaz.leerTexto();*/
+        gestor.guardarAlbum(nombre,fechalanzamiento,imagen,mp3);
+
 
     }
 
