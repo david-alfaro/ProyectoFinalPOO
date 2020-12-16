@@ -9,6 +9,7 @@ import java.time.LocalDate;
  * @since 28/11/2020
  */
 public class Artista {
+    private int id;
     private String nombre;
     private  String apellido1;
     private String nombreArtistico;
@@ -17,6 +18,14 @@ public class Artista {
     private String descripcion;
     private LocalDate fechaNacimiento;
     private LocalDate fechaDefuncion;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;

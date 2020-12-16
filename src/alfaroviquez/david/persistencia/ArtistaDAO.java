@@ -21,14 +21,14 @@ public class ArtistaDAO {
 
         this.con = con;
         try{
-            this.cmdInsertar = con.prepareStatement(Template_Insertar);
+            this.cmdInsertar = con.prepareStatement(Template_Insertar,Statement.RETURN_GENERATED_KEYS);
         }catch (SQLException e){
             e.printStackTrace();
         }
     }
 
-    public void registrarArtista(Artista artista) throws SQLException {
-        //DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public int registrarArtista(Artista artista) throws SQLException {
+        int indiceArtista = 0;
         if(this.cmdInsertar!=null){
             this.cmdInsertar.setString(1,artista.getNombre());
             this.cmdInsertar.setString(2,artista.getApellido1());
@@ -39,34 +39,13 @@ public class ArtistaDAO {
             this.cmdInsertar.setInt(7,artista.getEdad());
             this.cmdInsertar.setString(8,artista.getDescripcion());
             this.cmdInsertar.execute();
+            ResultSet rs = cmdInsertar.getGeneratedKeys();
+            while (rs.next()){
+                indiceArtista = rs.getInt(1);
+            }
 
         }
-        /*
-        try{
-            Statement statement = con.createStatement();
-            StringBuilder sentence = new StringBuilder("insert into artista (nombreArtista,apellido1,nombreArtistico,pais,fechaNacimiento,fechaDefuncion,edad,descripcion)");
-            sentence.append("values ('");
-            sentence.append(artista.getNombre());
-            sentence.append("','");
-            sentence.append(artista.getApellido1());
-            sentence.append("','");
-            sentence.append(artista.getNombreArtistico());
-            sentence.append("','");
-            sentence.append(artista.getPaisNacimiento());
-            sentence.append("','");
-            sentence.append(artista.getFechaNacimiento());
-            sentence.append("',");
-            sentence.append(artista.getFechaDefuncion()==null ? null:"'"+artista.getFechaDefuncion()+"'");
-            sentence.append(",");
-            sentence.append(artista.getEdad());
-            sentence.append(",'");
-            sentence.append(artista.getDescripcion());
-            sentence.append("')");
-            statement.execute(sentence.toString());
-        }catch (SQLException e){
-            e.printStackTrace();
-        }*/
-
+        return indiceArtista;
 
     }
 
@@ -83,8 +62,8 @@ public class ArtistaDAO {
                 unArtista.setApellido1(results.getString("apellido1"));
                 unArtista.setNombreArtistico(results.getString("nombreArtistico"));
                 unArtista.setPaisNacimiento(results.getString("pais"));
-                unArtista.setFechaNacimiento(LocalDate.parse(results.getString("fechaNacimiento")));
-                unArtista.setFechaDefuncion(LocalDate.parse(results.getString("fechaDefuncion")));
+                unArtista.setFechaNacimiento(results.getDate("fechaNacimiento").toLocalDate());
+                //unArtista.setFechaDefuncion(results.getDate("fechaDefuncion").toLocalDate());
                 unArtista.setEdad(results.getInt("edad"));
                 unArtista.setDescripcion(results.getString("descripcion"));
                 resultadosBD.add(unArtista);

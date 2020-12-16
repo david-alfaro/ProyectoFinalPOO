@@ -91,13 +91,19 @@ public class AlbumController implements Initializable {
     }
 
     public void btnEditar(ActionEvent actionEvent) {
+        String query = "update album set nombreAlbum='"+txtNombreAlbum.getText()+"', imagenAlbum='"+imagenAlbumBD+"',fechaLanzamiento='"+dateLanzamientoAlbum.getValue()+"',mp3file='"+mp3BD+"' where nombreAlbum='"+txtNombreAlbum.getText()+"'";
+        executeQuery(query);
+        mostrarAlbum();
     }
 
     public void btnEliminar(ActionEvent actionEvent) {
+        String query = "delete from album where nombreAlbum='"+txtNombreAlbum.getText()+"'";
+        executeQuery(query);
+        mostrarAlbum();
     }
 
 
-    private ObservableList<Album> getAlbum(){
+    public ObservableList<Album> getAlbum(){
         ObservableList<Album> listaAlbum = FXCollections.observableArrayList();
         DataBaseConnection connection = new DataBaseConnection();
         Connection connectDB = connection.getConnection();
@@ -134,5 +140,16 @@ public class AlbumController implements Initializable {
         String imagenReload = album.getImagen();
         Image image = new Image("file:"+imagenReload);
         imageAlbum.setImage(image);
+    }
+
+    private void executeQuery(String query){
+        DataBaseConnection connect  = new DataBaseConnection();
+        Connection connectDB = connect.getConnection();
+        try{
+            Statement st = connectDB.createStatement();
+            st.executeUpdate(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

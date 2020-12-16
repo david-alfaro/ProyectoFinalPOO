@@ -52,7 +52,7 @@ public class Controlador {
                 listarCompositores();
                 break;
             case 10:
-                registrarCancion();
+                //registrarCancion();
                 break;
             case 11:
                 listarCanciones();
@@ -229,7 +229,7 @@ public class Controlador {
         }
     }
 
-    private void registrarCancion() {
+    public void registrarCancion(String nombre, String mp3,LocalDate fechaLanzamiento, String Nombregenero, String Nombrecompositor,String Nombreartista, String Nombrealbum) {
         /*
         interfaz.imprimirMensaje("Nombre de la canción: ");
         String nombreCancion = interfaz.leerTexto();
@@ -238,9 +238,13 @@ public class Controlador {
         interfaz.imprimirMensaje("Ingrese la cancion-->");
         //en estos momentos se esta probando con un string como link de la cancion
         String mp3 = interfaz.leerTexto();
-        LocalDate fechaLanzamiento = obtenerFecha(fecha);
-        gestor.guardarCancion(nombre,artista,genero,compositor,album,mp3,fechaLanzamiento);
-        interfaz.imprimirMensaje("Cancion creada!");*/
+        LocalDate fechaLanzamiento = obtenerFecha(fecha);*/
+        Genero genero = gestor.encontrarGenero(Nombregenero);
+        Compositor compositor = gestor.encontrarCompositorporNombre(Nombrecompositor);
+        Artista artista = gestor.encontrarArtistaporNombre(Nombreartista);
+        Album album = gestor.encontrarAlbum(Nombrealbum);
+        gestor.guardarCancion(nombre,mp3,fechaLanzamiento,genero,compositor,artista,album);
+
 
 
     }

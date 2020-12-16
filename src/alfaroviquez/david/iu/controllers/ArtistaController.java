@@ -108,7 +108,7 @@ public class ArtistaController implements Initializable {
         dateNac.setValue(null);
     }
 
-    private ObservableList<Artista> getArtistas() {
+    public ObservableList<Artista> getArtistas() {
         ObservableList<Artista> listaArtistas = FXCollections.observableArrayList();
         DataBaseConnection connectionBD = new DataBaseConnection();
         Connection connectBD = connectionBD.getConnection();

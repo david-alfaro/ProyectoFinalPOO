@@ -84,11 +84,11 @@ public class Gestor {
     public void registroCompositor(String nombre, String apellido1,  int edad, String paisNacimiento, Genero genero) {
         Compositor nuevoCompositor = new Compositor(nombre, apellido1, edad, paisNacimiento, genero);
         try {
-            repositorioCompositoresDB.registrarCompositor(nuevoCompositor);
+            nuevoCompositor.setId(repositorioCompositoresDB.registrarCompositor(nuevoCompositor));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(nuevoCompositor.getGenero().getId());
+
     }
 
     public List<Compositor> listarCompositores() {
@@ -98,7 +98,7 @@ public class Gestor {
     public void registroArtistas(String nombre, String apellido1, String nombreArtistico, String paisNacimiento, int edad, String descripcion, LocalDate fechaNacimiento, LocalDate fechaDefuncion)  {
         Artista nuevoArtista = new Artista(nombre, apellido1, nombreArtistico, paisNacimiento, edad, descripcion, fechaNacimiento, fechaDefuncion);
         try {
-            repositorioArtistasDB.registrarArtista(nuevoArtista);
+            nuevoArtista.setId(repositorioArtistasDB.registrarArtista(nuevoArtista));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -131,9 +131,13 @@ public class Gestor {
     //return this.compositores;
     //}
 
-    public void guardarCancion(String nombre, Artista artista, Genero genero, Compositor compositor, Album album, String mp3, LocalDate fechaLanzamiento) {
+    public void guardarCancion(String nombre, String mp3,LocalDate fechaLanzamiento, Genero genero, Compositor compositor,Artista artista, Album album ) {
         Cancion nuevaCancion = new Cancion(nombre,artista,genero,compositor,album,mp3,fechaLanzamiento);
-        nuevaCancion.setId(repositiorCancionesBD.registrarCancion(nuevaCancion));
+        try {
+            nuevaCancion.setId(repositiorCancionesBD.registrarCancion(nuevaCancion));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(nuevaCancion.getId());
     }
 
@@ -143,11 +147,21 @@ public class Gestor {
     }
 
 
-    public Compositor encontrarCompositor(String nombre) {
+    public Compositor encontrarCompositorporId(int id) {
         List<Compositor> unCompositor = listarCompositores();
         for (int i = 0; i < unCompositor.size(); i++) {
             Compositor temp = unCompositor.get(i);
-            if (temp.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+            if (temp.getId()==id) {
+                return temp;
+            }
+        }
+        return null;
+    }
+    public Compositor encontrarCompositorporNombre(String nombre) {
+        List<Compositor> unCompositor = listarCompositores();
+        for (int i = 0; i < unCompositor.size(); i++) {
+            Compositor temp = unCompositor.get(i);
+            if (temp.getNombre().equalsIgnoreCase(nombre)) {
                 return temp;
             }
         }
@@ -177,11 +191,41 @@ public class Gestor {
         return null;
     }
 
-    public Artista encontrarArtista(String nombre) {
+    public Artista encontrarArtistaporId(int id) {
         List<Artista> listaDEArtistas = listarArtistas();
         for (int i = 0; i < listaDEArtistas.size(); i++) {
             Artista temp = listaDEArtistas.get(i);
-            if (temp.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+            if (temp.getId()==id) {
+                return temp;
+            }
+        }
+        return null;
+    }
+    public Artista encontrarArtistaporNombre(String nombre) {
+        List<Artista> listaDEArtistas = listarArtistas();
+        for (int i = 0; i < listaDEArtistas.size(); i++) {
+            Artista temp = listaDEArtistas.get(i);
+            if (temp.getNombre().equalsIgnoreCase(nombre)) {
+                return temp;
+            }
+        }
+        return null;
+    }
+    public Album encontrarAlbumporId(int id) {
+        List<Album> listaDEAlbum = listarAlbums();
+        for (int i = 0; i < listaDEAlbum.size(); i++) {
+            Album temp = listaDEAlbum.get(i);
+            if (temp.getId()==id) {
+                return temp;
+            }
+        }
+        return null;
+    }
+    public Album encontrarAlbumporNombre(String nombre) {
+        List<Album> listaDEAlbum = listarAlbums();
+        for (int i = 0; i < listaDEAlbum.size(); i++) {
+            Album temp = listaDEAlbum.get(i);
+            if (temp.getNombre().equalsIgnoreCase(nombre)) {
                 return temp;
             }
         }

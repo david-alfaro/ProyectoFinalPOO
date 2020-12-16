@@ -7,11 +7,20 @@ package alfaroviquez.david.bl.entidades;
  * @since 28/11/2020
  */
 public class Compositor {
+    private int id;
     private String nombre;
     private String apellido1;
     private  int edad;
     private String paisNacimiento;
     private Genero genero;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;

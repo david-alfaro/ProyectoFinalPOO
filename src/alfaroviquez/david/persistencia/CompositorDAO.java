@@ -16,13 +16,14 @@ public class CompositorDAO {
 
          this.con=con;
          try{
-             this.cmdInsert=con.prepareStatement(TEMPLATE_INSERT);
+             this.cmdInsert=con.prepareStatement(TEMPLATE_INSERT,Statement.RETURN_GENERATED_KEYS);
          }catch (SQLException e){
              e.printStackTrace();
          }
      }
 
-     public void registrarCompositor(Compositor compositor) throws SQLException {
+     public int registrarCompositor(Compositor compositor) throws SQLException {
+         int indiceCompositor=0;
          if(this.cmdInsert!=null){
              this.cmdInsert.setString(1,compositor.getNombre());
              this.cmdInsert.setString(2,compositor.getApellido1());
@@ -30,27 +31,13 @@ public class CompositorDAO {
              this.cmdInsert.setString(4,compositor.getPaisNacimiento());
              this.cmdInsert.setInt(5, compositor.getGenero().getId());
              this.cmdInsert.execute();
-         }
-         /*
-         try{
-             Statement statement = con.createStatement();
-             StringBuilder sentence = new StringBuilder("insert into compositor (nombreCompositor,apellido1,apellido2,edad,paisNacimiento)");
-             sentence.append("values ('");
-             sentence.append(compositor.getNombre());
-             sentence.append("','");
-             sentence.append(compositor.getApellido1());
-             sentence.append("','");
-             sentence.append(compositor.getApellido2());
-             sentence.append("',");
-             sentence.append(compositor.getEdad());
-             sentence.append(",'");
-             sentence.append(compositor.getPaisNacimiento());
-             sentence.append("')");
-             statement.execute(sentence.toString());
+             ResultSet rs = cmdInsert.getGeneratedKeys();
+             while (rs.next()){
+                 indiceCompositor = rs.getInt(1);
+             }
 
-         }catch (SQLException e){
-             e.printStackTrace();
-         }*/
+         }
+         return indiceCompositor;
      }
 
      public List<Compositor> encontrarCompositores(){
@@ -60,6 +47,7 @@ public class CompositorDAO {
              ResultSet results = statement.executeQuery("Select * from compositor");
              while(results.next()){
                  Compositor unCompositor = new Compositor();
+                 unCompositor.setId(results.getInt("idCompositor"));
                  unCompositor.setNombre(results.getString("nombreCompositor"));
                  unCompositor.setApellido1(results.getString("apellido1"));
                  unCompositor.setEdad(results.getInt("edad"));
