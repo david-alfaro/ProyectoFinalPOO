@@ -124,6 +124,7 @@ public class ArtistaController implements Initializable {
                 artista.setPaisNacimiento(resultSet.getString("pais"));
                 artista.setEdad(resultSet.getInt("edad"));
                 artista.setDescripcion(resultSet.getString("descripcion"));
+                
                 listaArtistas.add(artista);
             }
         } catch (Exception e) {

@@ -16,13 +16,14 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfaroviquez.david.iu.controllers.CancionController">
    <right>
-      <TableView fx:id="tblCanciones" opacity="0.87" prefHeight="600.0" prefWidth="837.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <TableView fx:id="tblCanciones" onMouseClicked="#handleMouseAction" opacity="0.87" prefHeight="600.0" prefWidth="837.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="colNombreCancion" prefWidth="226.0" text="Nombre" />
-            <TableColumn fx:id="colCompositor" prefWidth="132.0" text="Compositor" />
-            <TableColumn fx:id="colGenero" prefWidth="148.0" text="Genero" />
-            <TableColumn fx:id="colAlbum" prefWidth="162.0" text="Album" />
-            <TableColumn fx:id="colFechaLanzamiento" prefWidth="158.0" text="Fecha " />
+          <TableColumn fx:id="colNombreCancion" prefWidth="149.0" text="Nombre" />
+            <TableColumn fx:id="colCompositor" prefWidth="101.0" text="Compositor" />
+            <TableColumn fx:id="colGenero" prefWidth="145.0" text="Genero" />
+            <TableColumn fx:id="colAlbum" prefWidth="104.0" text="Album" />
+            <TableColumn fx:id="colFechaLanzamiento" prefWidth="138.0" text="Fecha " />
+            <TableColumn fx:id="colMp3file" prefWidth="189.0" text="MP3 File" />
         </columns>
       </TableView>
    </right>
