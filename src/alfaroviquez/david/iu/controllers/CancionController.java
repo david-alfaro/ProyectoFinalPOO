@@ -64,12 +64,16 @@ public class CancionController implements Initializable {
     private TableColumn<?, ?> colAlbum;
     @FXML
     private TableColumn<Cancion, String> colMp3file;
+    @FXML
+    private TableColumn<Cancion, Integer> colCancionId;
 
     @FXML
     private Slider progressbar;
 
     @FXML
     private TableColumn<Cancion, LocalDate> colFechaLanzamiento;
+
+    private int CancionID;
 
     String cancionMP3;
     String mp3ToPlay;
@@ -103,13 +107,13 @@ public class CancionController implements Initializable {
 
 
     public void btnEditar(ActionEvent actionEvent) {
-        String update = "update cancion set nombreCancion = '"+txtNombreCancion.getText()+"', mp3='"+cancionMP3+"', fechaLanzamiento='"+dateCancion.getValue()+"' where nombreCancion='"+txtNombreCancion.getText()+"'";
+        String update = "update cancion set nombreCancion = '"+txtNombreCancion.getText()+"', mp3='"+cancionMP3+"', fechaLanzamiento='"+dateCancion.getValue()+"' where idCancion='"+CancionID+"'";
         executeQuery(update);
         mostrarCanciones();
     }
 
     public void btnEliminar(ActionEvent actionEvent) {
-        String delete = "delete from cancion where nombreCancion='"+txtNombreCancion.getText()+"'";
+        String delete = "delete from cancion where idCancion='"+CancionID+"'";
         executeQuery(delete);
         mostrarCanciones();
     }
@@ -216,6 +220,7 @@ public class CancionController implements Initializable {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()){
                 Cancion cancion = new Cancion();
+                cancion.setId(rs.getInt("idCancion"));
                 cancion.setNombre(rs.getString("nombreCancion"));
                 cancion.setFechaLanzamiento(rs.getDate("fechaLanzamiento").toLocalDate());
                 cancion.setMp3(rs.getString("mp3"));
@@ -233,6 +238,7 @@ public class CancionController implements Initializable {
         colNombreCancion.setCellValueFactory(new PropertyValueFactory<Cancion,String>("nombre"));
         colFechaLanzamiento.setCellValueFactory(new PropertyValueFactory<Cancion,LocalDate>("fechaLanzamiento"));
         colMp3file.setCellValueFactory(new PropertyValueFactory<Cancion,String>("mp3"));
+        colCancionId.setCellValueFactory(new PropertyValueFactory<Cancion,Integer>("id"));
         tblCanciones.setItems(lista);
 
     }
@@ -254,6 +260,17 @@ public class CancionController implements Initializable {
         txtNombreCancion.setText(cancion.getNombre());
         dateCancion.setValue(cancion.getFechaLanzamiento());
         mp3ToPlay = cancion.getMp3();
+        CancionID = cancion.getId();
         System.out.println(mp3ToPlay);
+    }
+
+    public void limpiarCampos(ActionEvent actionEvent) {
+        txtNombreCancion.setText("");
+        dateCancion.setValue(null);
+        cbxAlbum.setValue(null);
+        cbxGenero.setValue(null);
+        cbxArtista.setValue(null);
+        cbxCompositor.setValue(null);
+
     }
 }

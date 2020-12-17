@@ -17,8 +17,9 @@
    <right>
       <TableView fx:id="tblAlbum" onMouseClicked="#handleMouseEvent" opacity="0.87" prefHeight="600.0" prefWidth="795.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="colNombrealbum" minWidth="0.0" prefWidth="268.0" text="Nombre" />
-            <TableColumn fx:id="colfechaLanzamiento" prefWidth="219.0" text="Fecha Lanzamiento" />
+          <TableColumn fx:id="colNombrealbum" minWidth="0.0" prefWidth="193.0" text="Nombre" />
+            <TableColumn fx:id="colfechaLanzamiento" prefWidth="199.0" text="Fecha Lanzamiento" />
+            <TableColumn fx:id="colId" prefWidth="95.0" text="ID" />
         </columns>
       </TableView>
    </right>

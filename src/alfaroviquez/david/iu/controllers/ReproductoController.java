@@ -24,8 +24,10 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
-
 
 
 public class ReproductoController implements Initializable {
@@ -43,6 +45,7 @@ public class ReproductoController implements Initializable {
     @FXML
     private Slider volumeBar;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File fileImagenReproductor = new File("Imagenes/imagenReproductor.jpg");
@@ -51,8 +54,9 @@ public class ReproductoController implements Initializable {
     }
 
 
+    //este metodo lleva al usuario al formulario de canciones
     public void handleCanciones(MouseEvent mouseEvent) {
-        try{
+        try {
             Stage cancionStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("../escenas/cancion.fxml"));
             cancionStage.setScene(new Scene(root));
@@ -60,14 +64,15 @@ public class ReproductoController implements Initializable {
             cancionStage.setResizable(false);
             cancionStage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
     }
 
+    //este metodo lleva al usuario al formulario de artistas
     public void handleArtistas(MouseEvent mouseEvent) {
-        try{
+        try {
             Stage cancionStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("../escenas/artista.fxml"));
             cancionStage.setScene(new Scene(root));
@@ -75,14 +80,15 @@ public class ReproductoController implements Initializable {
             cancionStage.setResizable(false);
             cancionStage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
     }
 
+    //este metodo lleva al usuario al formulario de generos
     public void handleGenero(MouseEvent mouseEvent) {
-        try{
+        try {
             Stage generoStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("../escenas/genero.fxml"));
             generoStage.setScene(new Scene(root));
@@ -90,13 +96,15 @@ public class ReproductoController implements Initializable {
             generoStage.setResizable(false);
             generoStage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
     }
+
+    //este metodo lleva al usuario al formulario de albums
     public void handleAlbums(MouseEvent mouseEvent) {
-        try{
+        try {
             Stage generoStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("../escenas/album.fxml"));
             generoStage.setScene(new Scene(root));
@@ -104,14 +112,15 @@ public class ReproductoController implements Initializable {
             generoStage.setResizable(false);
             generoStage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
     }
 
+    //ese metodo lleva al usuario al formulario de compositores
     public void handleCompositores(MouseEvent mouseEvent) {
-        try{
+        try {
             Stage generoStage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("../escenas/compositor.fxml"));
             generoStage.setScene(new Scene(root));
@@ -119,21 +128,30 @@ public class ReproductoController implements Initializable {
             generoStage.setResizable(false);
             generoStage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
     }
+
+    List<String> listaMP3 = new ArrayList<>();//arraylist de mp3
+    Collection<String> collection = listaMP3;//se convierte en una colleccion para poder iterar
+    Iterable<String> iterable = collection;
 
     public void subirCancion(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Subir cancion");
         File file = fileChooser.showOpenDialog(null);
         pathCancion = file.toURI().toString();
+        listaMP3.add(pathCancion); // se agregan las direcciones de las canciones a la lista
+        Media media;
+        if (pathCancion != null) {
+            for (String element : iterable //con este ciclo se pretende recorrer la lista para reproducir cada cancion
+            ) {
+                media = new Media(element);
+                mediaPlayer = new MediaPlayer(media);
+            }
 
-        if(pathCancion!=null){
-            Media media = new Media(pathCancion);
-            mediaPlayer = new MediaPlayer(media);
             mediaView.setMediaPlayer(mediaPlayer);
 
             mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
@@ -142,30 +160,31 @@ public class ReproductoController implements Initializable {
                     progressBar.setValue(t1.toSeconds());
                 }
             });
-            progressBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+            progressBar.setOnMousePressed(new EventHandler<MouseEvent>() { //cuando se presiona en algun lugar en el slider la cancion se adelanta o atrasa a ese tiempo
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     mediaPlayer.seek(Duration.seconds(progressBar.getValue()));
                 }
             });
-            progressBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            progressBar.setOnMouseDragged(new EventHandler<MouseEvent>() { //cuando se arrastra el slider a algun lugar se toma el tiempo correspondiente y la cancion se adelanta o atrasa a ese momento
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     mediaPlayer.seek(Duration.seconds(progressBar.getValue()));
                 }
             });
+            /*
             mediaPlayer.setOnReady(new Runnable() {
                 @Override
                 public void run() {
                     Duration total = media.getDuration();
                     progressBar.setMax(total.toSeconds());
                 }
-            });
-            volumeBar.setValue(mediaPlayer.getVolume()*100);
+            });*/
+            volumeBar.setValue(mediaPlayer.getVolume() * 100);
             volumeBar.valueProperty().addListener(new InvalidationListener() {
                 @Override
                 public void invalidated(Observable observable) {
-                    mediaPlayer.setVolume(volumeBar.getValue()/100);
+                    mediaPlayer.setVolume(volumeBar.getValue() / 100);
                 }
             });
 

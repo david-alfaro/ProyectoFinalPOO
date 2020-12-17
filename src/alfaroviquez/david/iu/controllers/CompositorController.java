@@ -58,6 +58,10 @@ public class CompositorController implements Initializable {
     private TableColumn<Compositor, String> colPais;
     @FXML
     private TableColumn<Compositor, String> colGenero;
+    @FXML
+    private TableColumn<Compositor, Integer> colIDCompositor;
+
+    private int CompositiorId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,14 +81,14 @@ public class CompositorController implements Initializable {
     }
 
     public void handleActualizar(ActionEvent actionEvent) {
-        String query = "update compositor set nombreCompositor='"+txtNombreCompositor.getText()+"', apellido1='"+txtApellido.getText()+"',edad='"+txtEdad.getText()+"',paisNacimiento='"+txtPais.getText()+"' where nombreCompositor='"+txtNombreCompositor.getText()+"'";
+        String query = "update compositor set nombreCompositor='"+txtNombreCompositor.getText()+"', apellido1='"+txtApellido.getText()+"',edad='"+txtEdad.getText()+"',paisNacimiento='"+txtPais.getText()+"' where idCompositor='"+CompositiorId+"'";
         executeQuery(query);
         mostrarCompositores();
         System.out.println(query);
     }
 
     public void handleEliminar(ActionEvent actionEvent) {
-        String query = "delete from compositor where nombreCompositor='"+txtNombreCompositor.getText()+"'";
+        String query = "delete from compositor where idCompositor='"+CompositiorId+"'";
         executeQuery(query);
         mostrarCompositores();
     }
@@ -117,6 +121,7 @@ public class CompositorController implements Initializable {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 Compositor nuevoCompositor = new Compositor();
+                nuevoCompositor.setId(rs.getInt("idCompositor"));
                 nuevoCompositor.setNombre(rs.getString("nombreCompositor"));
                 nuevoCompositor.setApellido1(rs.getString("apellido1"));
                 nuevoCompositor.setEdad(rs.getInt("edad"));
@@ -137,6 +142,7 @@ public class CompositorController implements Initializable {
         colEdad.setCellValueFactory(new PropertyValueFactory<Compositor,Integer>("edad"));
         colPais.setCellValueFactory(new PropertyValueFactory<Compositor,String>("paisNacimiento"));
         colGenero.setCellValueFactory(new PropertyValueFactory<Compositor,String>("genero"));
+        colIDCompositor.setCellValueFactory(new PropertyValueFactory<Compositor,Integer>("id"));
         tblCompositor.setItems(lista);
 
     }
@@ -158,6 +164,7 @@ public class CompositorController implements Initializable {
         txtApellido.setText(unCompositor.getApellido1());
         txtEdad.setText(String.valueOf(unCompositor.getEdad()));
         txtPais.setText(unCompositor.getPaisNacimiento());
+        CompositiorId= unCompositor.getId();
 
     }
 }

@@ -36,6 +36,8 @@ public class AlbumController implements Initializable {
 
     @FXML
     private TableColumn<Album, LocalDate> colfechaLanzamiento;
+    @FXML
+    private TableColumn<Album, Integer> colId;
 
     @FXML
     private TextField txtNombreAlbum;
@@ -48,6 +50,8 @@ public class AlbumController implements Initializable {
 
     private String imagenAlbumBD;
     private String mp3BD;
+
+    private int AlbumId;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mostrarAlbum();
@@ -91,13 +95,13 @@ public class AlbumController implements Initializable {
     }
 
     public void btnEditar(ActionEvent actionEvent) {
-        String query = "update album set nombreAlbum='"+txtNombreAlbum.getText()+"', imagenAlbum='"+imagenAlbumBD+"',fechaLanzamiento='"+dateLanzamientoAlbum.getValue()+"',mp3file='"+mp3BD+"' where nombreAlbum='"+txtNombreAlbum.getText()+"'";
+        String query = "update album set nombreAlbum='"+txtNombreAlbum.getText()+"', imagenAlbum='"+imagenAlbumBD+"',fechaLanzamiento='"+dateLanzamientoAlbum.getValue()+"',mp3file='"+mp3BD+"' where idAlbum='"+AlbumId+"'";
         executeQuery(query);
         mostrarAlbum();
     }
 
     public void btnEliminar(ActionEvent actionEvent) {
-        String query = "delete from album where nombreAlbum='"+txtNombreAlbum.getText()+"'";
+        String query = "delete from album where idAlbum='"+AlbumId+"'";
         executeQuery(query);
         mostrarAlbum();
     }
@@ -105,6 +109,7 @@ public class AlbumController implements Initializable {
 
     public ObservableList<Album> getAlbum(){
         ObservableList<Album> listaAlbum = FXCollections.observableArrayList();
+
         DataBaseConnection connection = new DataBaseConnection();
         Connection connectDB = connection.getConnection();
         String query = "select * from album";
@@ -113,6 +118,7 @@ public class AlbumController implements Initializable {
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 Album album = new Album();
+                album.setId(rs.getInt("idAlbum"));
                 album.setNombre(rs.getString("nombreAlbum"));
                 album.setImagen(rs.getString("imagenAlbum"));
                 album.setFechalanzamiento(rs.getDate("fechaLanzamiento").toLocalDate());
@@ -122,6 +128,7 @@ public class AlbumController implements Initializable {
         }catch (SQLException e){
             e.printStackTrace();
         }
+
         return listaAlbum;
     }
 
@@ -129,6 +136,7 @@ public class AlbumController implements Initializable {
         ObservableList<Album> lista = getAlbum();
         colNombrealbum.setCellValueFactory(new PropertyValueFactory<Album,String>("nombre"));
         colfechaLanzamiento.setCellValueFactory(new PropertyValueFactory<Album,LocalDate>("fechalanzamiento"));
+        colId.setCellValueFactory(new PropertyValueFactory<Album,Integer>("id"));
         tblAlbum.setItems(lista);
 
     }
@@ -140,6 +148,7 @@ public class AlbumController implements Initializable {
         String imagenReload = album.getImagen();
         Image image = new Image("file:"+imagenReload);
         imageAlbum.setImage(image);
+        AlbumId=album.getId();
     }
 
     private void executeQuery(String query){

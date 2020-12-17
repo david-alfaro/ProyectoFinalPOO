@@ -35,8 +35,12 @@ public class GeneroController implements Initializable {
     private TableColumn<Genero, String> colDescripcionGenero;
 
     @FXML
+    private TableColumn<Genero, Integer> colGeneroId;
+
+    @FXML
     private Label lblAlerta;
 
+    private int GeneroId;
     Controlador controlador = new Controlador();
 
     @Override
@@ -57,13 +61,13 @@ public class GeneroController implements Initializable {
     }
 
     public void handleActualizarGenero(ActionEvent actionEvent) {
-        String query = "update genero set nombreGenero='"+txtNombreGenero.getText()+"', descripcion='"+txtDescripcion.getText()+"' where nombreGenero='"+txtNombreGenero.getText()+"'";
+        String query = "update genero set nombreGenero='"+txtNombreGenero.getText()+"', descripcion='"+txtDescripcion.getText()+"' where idGenero='"+GeneroId+"'";
         executeQuery(query);
         mostrarGeneros();
     }
 
     public void handleEliminarGenero(ActionEvent actionEvent) {
-        String query = "delete from genero where nombreGenero='"+txtNombreGenero.getText()+"'";
+        String query = "delete from genero where idGenero='"+GeneroId+"'";
         executeQuery(query);
         mostrarGeneros();
     }
@@ -83,6 +87,7 @@ public class GeneroController implements Initializable {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 Genero unGenero = new Genero();
+                unGenero.setId(resultSet.getInt("idGenero"));
                 unGenero.setNombre(resultSet.getString("nombreGenero"));
                 unGenero.setDescripcion(resultSet.getString("descripcion"));
                 listaGeneros.add(unGenero);
@@ -97,6 +102,7 @@ public class GeneroController implements Initializable {
         ObservableList<Genero> lista = getGeneros();
         colNombreGenero.setCellValueFactory(new PropertyValueFactory<Genero,String>("nombre"));
         colDescripcionGenero.setCellValueFactory(new PropertyValueFactory<Genero,String>("descripcion"));
+        colGeneroId.setCellValueFactory(new PropertyValueFactory<Genero,Integer>("id"));
         tblGenero.setItems(lista);
     }
 
@@ -105,6 +111,7 @@ public class GeneroController implements Initializable {
         Genero unGenero = tblGenero.getSelectionModel().getSelectedItem();
         txtNombreGenero.setText(String.valueOf(unGenero.getNombre()));
         txtDescripcion.setText(String.valueOf(unGenero.getDescripcion()));
+        GeneroId = unGenero.getId();
     }
 
     private void executeQuery(String query){

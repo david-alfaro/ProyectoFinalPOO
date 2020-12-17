@@ -86,7 +86,8 @@
       <TableView fx:id="tblGenero" onMouseClicked="#handleMouseAction" prefHeight="500.0" prefWidth="498.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="colNombreGenero" prefWidth="193.0" text="Genero" />
-          <TableColumn fx:id="colDescripcionGenero" prefWidth="289.0" text="Descripcion" />
+          <TableColumn fx:id="colDescripcionGenero" prefWidth="229.0" text="Descripcion" />
+            <TableColumn fx:id="colGeneroId" prefWidth="60.0" text="ID" />
         </columns>
       </TableView>
    </right>

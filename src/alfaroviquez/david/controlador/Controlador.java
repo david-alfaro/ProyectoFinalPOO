@@ -7,6 +7,7 @@ import alfaroviquez.david.iu.IU;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 
 public class Controlador {
@@ -308,9 +309,12 @@ public class Controlador {
     }
 
     public void listarAlbums() {
+
         for (Album album : gestor.listarAlbums()
         ) {
             interfaz.imprimirMensaje(album.toCSVLine());
+
+
         }
     }
 
