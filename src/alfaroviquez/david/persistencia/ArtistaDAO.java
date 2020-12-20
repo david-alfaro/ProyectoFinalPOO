@@ -58,12 +58,13 @@ public class ArtistaDAO {
             ResultSet results = statement.executeQuery("Select * from artista");
             while(results.next()){
                 Artista unArtista = new Artista();
+                unArtista.setId(results.getInt("idArtista"));
                 unArtista.setNombre(results.getString("nombreArtista"));
                 unArtista.setApellido1(results.getString("apellido1"));
                 unArtista.setNombreArtistico(results.getString("nombreArtistico"));
                 unArtista.setPaisNacimiento(results.getString("pais"));
                 unArtista.setFechaNacimiento(results.getDate("fechaNacimiento").toLocalDate());
-                unArtista.setFechaDefuncion(results.getDate("fechaDefuncion").toLocalDate());
+               // unArtista.setFechaDefuncion(results.getDate("fechaDefuncion").toLocalDate());
                 unArtista.setEdad(results.getInt("edad"));
                 unArtista.setDescripcion(results.getString("descripcion"));
                 resultadosBD.add(unArtista);

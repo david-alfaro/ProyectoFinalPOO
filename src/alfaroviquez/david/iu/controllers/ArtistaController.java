@@ -68,6 +68,11 @@ public class ArtistaController implements Initializable {
     @FXML
     private TableColumn<Artista, String> colDescripcion;
 
+    @FXML
+    private TableColumn<Artista, Integer> colArtistaID;
+
+    private int idArtista;
+
     Controlador controlador = new Controlador();
 
     public void handleGuardar(ActionEvent actionEvent) {
@@ -84,16 +89,16 @@ public class ArtistaController implements Initializable {
 
     public void handleEditar(ActionEvent actionEvent) {
        String query = "update artista set nombreArtista='"+txtNombreArtista.getText()+"',apellido1='"+txtApellido.getText()+"', nombreArtistico='"+txtNombreArtistico.getText()+"', pais ='"+txtPais.getText()+"',fechaNacimiento='"+dateNac.getValue()+"', fechaDefuncion='";
-       query += dateDef.getValue()==null? null:"'"+dateDef.getValue()+"'";
+       query += dateDef.getValue()==null? null:dateDef.getValue();
        query += "',";
-       query +="edad=TIMESTAMPDIFF(YEAR,fechaNacimiento,CURDATE()), descripcion ='"+txtDescripcion.getText()+"' where nombreArtista='"+txtNombreArtista.getText()+"'";
+       query +="edad=TIMESTAMPDIFF(YEAR,fechaNacimiento,CURDATE()), descripcion ='"+txtDescripcion.getText()+"' where idArtista='"+idArtista+"'";
        executeQuery(query);
        mostrarArtista();
         System.out.println(query);
     }
 
     public void handelEmilinar(ActionEvent actionEvent) {
-        String query = "delete from artista where nombreArtista = '"+txtNombreArtista.getText()+"'";
+        String query = "delete from artista where idArtista = '"+idArtista+"'";
         executeQuery(query);
         mostrarArtista();
     }
@@ -118,6 +123,7 @@ public class ArtistaController implements Initializable {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 Artista artista = new Artista();
+                artista.setId(resultSet.getInt("idArtista"));
                 artista.setNombre(resultSet.getString("nombreArtista"));
                 artista.setApellido1(resultSet.getString("apellido1"));
                 artista.setNombreArtistico(resultSet.getString("nombreArtistico"));
@@ -135,6 +141,7 @@ public class ArtistaController implements Initializable {
 
     private void mostrarArtista() {
         ObservableList<Artista> lista = getArtistas();
+        colArtistaID.setCellValueFactory(new PropertyValueFactory<Artista,Integer>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<Artista, String>("nombre"));
         colApellido.setCellValueFactory(new PropertyValueFactory<Artista, String>("apellido1"));
         colNombreArtistico.setCellValueFactory((new PropertyValueFactory<Artista, String>("nombreArtistico")));
@@ -147,6 +154,7 @@ public class ArtistaController implements Initializable {
 
     public void handleMouseAction(MouseEvent mouseEvent) {
         Artista unArtista = tblArtistas.getSelectionModel().getSelectedItem();
+        idArtista = unArtista.getId();
         txtNombreArtista.setText(String.valueOf(unArtista.getNombre()));
         txtApellido.setText(String.valueOf(unArtista.getApellido1()));
         txtNombreArtistico.setText(String.valueOf(unArtista.getNombreArtistico()));

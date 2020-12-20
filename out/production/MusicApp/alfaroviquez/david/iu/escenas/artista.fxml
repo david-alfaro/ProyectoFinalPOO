@@ -21,7 +21,8 @@
             <TableColumn fx:id="colNombreArtistico" prefWidth="136.0" text="Nombre Artístico" />
             <TableColumn fx:id="colPais" prefWidth="153.0" text="Pais Nacimiento" />
             <TableColumn fx:id="colEdad" prefWidth="82.0" text="Edad" />
-            <TableColumn fx:id="colDescripcion" prefWidth="196.0" text="Descripción" />
+            <TableColumn fx:id="colDescripcion" prefWidth="139.0" text="Descripción" />
+            <TableColumn fx:id="colArtistaID" prefWidth="57.0" text="ID" />
         </columns>
       </TableView>
    </right>
