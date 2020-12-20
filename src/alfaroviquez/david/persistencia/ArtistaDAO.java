@@ -35,7 +35,7 @@ public class ArtistaDAO {
             this.cmdInsertar.setString(3,artista.getNombreArtistico());
             this.cmdInsertar.setString(4,artista.getPaisNacimiento());
             this.cmdInsertar.setDate(5, Date.valueOf(artista.getFechaNacimiento()));
-            this.cmdInsertar.setString(6,artista.getFechaDefuncion()==null ? null:"'"+artista.getFechaDefuncion()+"'");
+            this.cmdInsertar.setDate(6,Date.valueOf(artista.getFechaDefuncion()==null ? null:artista.getFechaDefuncion()));
             this.cmdInsertar.setInt(7,artista.getEdad());
             this.cmdInsertar.setString(8,artista.getDescripcion());
             this.cmdInsertar.execute();
@@ -63,7 +63,7 @@ public class ArtistaDAO {
                 unArtista.setNombreArtistico(results.getString("nombreArtistico"));
                 unArtista.setPaisNacimiento(results.getString("pais"));
                 unArtista.setFechaNacimiento(results.getDate("fechaNacimiento").toLocalDate());
-                //unArtista.setFechaDefuncion(results.getDate("fechaDefuncion").toLocalDate());
+                unArtista.setFechaDefuncion(results.getDate("fechaDefuncion").toLocalDate());
                 unArtista.setEdad(results.getInt("edad"));
                 unArtista.setDescripcion(results.getString("descripcion"));
                 resultadosBD.add(unArtista);
